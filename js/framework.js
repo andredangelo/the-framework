@@ -910,12 +910,14 @@ function browser() {
                             }
                             
                             
-                            
+                            try{
 	                            $(".thebox-content").css("top", scrollAtual + $(window).height() / 2);
 	                            $(".thebox-content").css("margin-left", -($(".thebox-content").width() / 2 + Number($(".thebox-content").css("padding-left").replace("px", ""))));
 	                            $(".thebox-content").css("margin-top", -$(".thebox-content").height() / 2);
 	                            $(".thebox-bg").css("width", $(window).width());
-                            
+                            }catch(err){
+
+                            }
 
                         });
                         /* end: Resize */

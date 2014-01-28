@@ -2,7 +2,7 @@
 * ----------------------------- FRAMEWORK -------------------------------------
 Developer: André dos Santos D´Angelo
 01/07/2013
-	
+    
 */
 
 
@@ -243,6 +243,8 @@ function browser() {
                     $(this).addClass("pointer");
                 }
 
+
+
             });
 
 
@@ -411,7 +413,7 @@ function browser() {
 
 
 
-        /* Arrows	 */
+        /* Arrows    */
 
         if (settings.arrow) {
             arrows();
@@ -467,6 +469,18 @@ function browser() {
         }
 
         /* end: Arrows */
+
+
+
+        validateOneBanner();
+        /* If has 1 banner, display none in controls */
+        function validateOneBanner(){
+            if(totalNumbersBanners == 1){
+                 $(thebanner).find(".the-banner-controls").css("display", "none");
+                 $(thebanner).find("#the-banner-right").css("display", "none");
+                 $(thebanner).find("#the-banner-left").css("display", "none");
+            }        
+        }
 
 
 
@@ -840,14 +854,14 @@ function browser() {
                         } else {
                             iframeHeight = "100%"
                         }
-						
+                        
 
                         if (div.attr("data-width")) {
                             $('.thebox-content').css('width', div.attr("data-width"));
                         } else {
                             $('.thebox-content').css('width', div.outerWidth());
                             
-							
+                            
                         }
 
 
@@ -857,8 +871,8 @@ function browser() {
                         } else {
                             $('.thebox-content').css('height', div.outerHeight());
                         }
-						
-						//alert(div.find("div").outerHeight());
+                        
+                        //alert(div.find("div").outerHeight());
 
 
                          
@@ -896,25 +910,25 @@ function browser() {
                             
                             
                             if(larguraBox2 >= larguraTotal-40){
-	                           
-	                            $(".thebox-content").css('width', larguraTotal-80);
-	                            $(".thebox-content").css('height', 'auto');
+                               
+                                $(".thebox-content").css('width', larguraTotal-80);
+                                $(".thebox-content").css('height', 'auto');
 
                             }else{
-	                           
-	                           if($(".thebox-content").width() < larguraBox){
-	                            $(".thebox-content").css('width', larguraTotal-80);
+                               
+                               if($(".thebox-content").width() < larguraBox){
+                                $(".thebox-content").css('width', larguraTotal-80);
 
-	                           }
-	                           
+                               }
+                               
                             }
                             
                             
                             try{
-	                            $(".thebox-content").css("top", scrollAtual + $(window).height() / 2);
-	                            $(".thebox-content").css("margin-left", -($(".thebox-content").width() / 2 + Number($(".thebox-content").css("padding-left").replace("px", ""))));
-	                            $(".thebox-content").css("margin-top", -$(".thebox-content").height() / 2);
-	                            $(".thebox-bg").css("width", $(window).width());
+                                $(".thebox-content").css("top", scrollAtual + $(window).height() / 2);
+                                $(".thebox-content").css("margin-left", -($(".thebox-content").width() / 2 + Number($(".thebox-content").css("padding-left").replace("px", ""))));
+                                $(".thebox-content").css("margin-top", -$(".thebox-content").height() / 2);
+                                $(".thebox-bg").css("width", $(window).width());
                             }catch(err){
 
                             }
@@ -1155,9 +1169,9 @@ function browser() {
                     $("#" + This.attr("href")).appendTo(parentDiv);
                     $("#" + This.attr("href")).css("display", "none");
                     $("#" + This.attr("href")).css("width", $("#" + This.attr("href")).width());
-					$("#" + This.attr("href")).css("width", "");
-					$("#" + This.attr("href")).css("height", "");
-					
+                    $("#" + This.attr("href")).css("width", "");
+                    $("#" + This.attr("href")).css("height", "");
+                    
                     if (This.attr('data-iframe')) {
                         $('#thebox-iframe').remove();
                     }
@@ -1354,40 +1368,40 @@ function menuLeft() {
 /** Component: Menu + Submenu **/
 /*function menuSub(totalLevel){
 if(typeof(totalLevel)==='undefined') totalLevel = 3;
-		
+        
 var n=1;
 var stMenu = ".level";
 var stMenu2 = "";
 var topStartMenu = 0;
-		
+        
 for(n; n <= totalLevel; n++){
-						
+                        
 stMenu2 += stMenu+n+">";
 $(stMenu+n).mouseover({param1: n, param2: stMenu+n}, fOver);
 $(stMenu+n).mouseleave({param1: n, param2: stMenu+n}, fOut);
-			
+            
 }
-		
+        
 function fOver(event){
-			
+            
 topStartMenu = $(this).height();
 leftMenu = $(this).width();
-			
+            
 var menuAbrir = event.data.param2 + " > .menu-submenu";
-			
+            
 if(event.data.param1 == 1){
 $(menuAbrir).css("top", topStartMenu);
 }else{
 $(menuAbrir).css("left", $(this).width());
 }
-							
+                            
 $(this).find("> .menu-submenu").css("display", "block");
 }
-		
+        
 function fOut(event){
-			
+            
 $(this).find("> .menu-submenu").css("display", "none");
-			
+            
 }
 }*/
 /** end: Component: Menu + Submenu **/
@@ -1448,44 +1462,7 @@ $(this).find("> .menu-submenu").css("display", "none");
 
 
         if (settings.responsive) {
-            createMenu();
-            responsiveMenu();
-            $(window).resize(function () {
-                responsiveMenu();
-            });
-
-            function responsiveMenu() {
-
-
-                if (!toogleMenu) {
-                    $(settings.base).stop().css("margin-left", "0px");
-                    $('.the-menu-minibar').stop().css("margin-left", "0px");
-                    $('.the-menu-responsive').stop().animate({ left: -$('.the-menu-responsive').width() }, 0, function () {
-                        //$(settings.base).css('width', '100%');
-                    });
-                    toogleMenu = true;
-                }
-
-                $('.the-menu-responsive').css('minHeight', $(window).height());
-
-
-                if ($(window).width() < settings.minWidth) {
-                    This.css('display', 'none');
-                    $('.the-menu-minibar').css('display', 'block');
-                } else {
-                    $('.the-menu-minibar').css('display', 'none');
-                    This.css('display', '');
-                    //This.html(estruturaMenu);
-                    $('.the-menu-responsive').css('left', -$('.the-menu-responsive').width());
-                    $(settings.base).css('margin-left', 0);
-                    toogleMenu = true;
-                    $('body').css('overflow-x', '');
-                    addOver();
-                }
-
-            }
-
-
+            
             function createMenu() {
 
                 $('body').prepend("<div class='the-menu-minibar'><a class='the-menu-ico btn'>" + settings.labelButtonMenu + "</a>" + settings.htmlMiniBar + "</div>");
@@ -1528,6 +1505,46 @@ $(this).find("> .menu-submenu").css("display", "none");
                         toogleMenu = true;
                     }
                 });
+
+            createMenu();
+            responsiveMenu();
+            $(window).resize(function () {
+                responsiveMenu();
+            });
+
+            function responsiveMenu() {
+
+
+                if (!toogleMenu) {
+                    $(settings.base).stop().css("margin-left", "0px");
+                    $('.the-menu-minibar').stop().css("margin-left", "0px");
+                    $('.the-menu-responsive').stop().animate({ left: -$('.the-menu-responsive').width() }, 0, function () {
+                        //$(settings.base).css('width', '100%');
+                    });
+                    toogleMenu = true;
+                }
+
+                $('.the-menu-responsive').css('minHeight', $(window).height());
+
+
+                if ($(window).width() < settings.minWidth) {
+                    This.css('display', 'none');
+                    $('.the-menu-minibar').css('display', 'block');
+                } else {
+                    $('.the-menu-minibar').css('display', 'none');
+                    This.css('display', '');
+                    //This.html(estruturaMenu);
+                    $('.the-menu-responsive').css('left', -$('.the-menu-responsive').width());
+                    $(settings.base).css('margin-left', 0);
+                    toogleMenu = true;
+                    $('body').css('overflow-x', '');
+                    addOver();
+                }
+
+            }
+
+
+            
 
 
 
@@ -1664,24 +1681,24 @@ function masksForms() {
     // jQuery Masked Input
     //$('textarea').html('');
 
-	
+    
 
     $('.maskTel').mask("(99) 9999-9999?9").ready(function (event) {
-		try{
-			var target, phone, element;
-			target = (event.currentTarget) ? event.currentTarget : event.srcElement;
-			phone = target.value.replace(/\D/g, '');
-			element = $(target);
-			element.unmask();
-			
-			if (phone.length > 10) {
-				element.mask("(99) 99999-999?9");
-			} else {
-				element.mask("(99) 9999-9999?9");
-			}
-			}catch(err){
-		
-			}
+        try{
+            var target, phone, element;
+            target = (event.currentTarget) ? event.currentTarget : event.srcElement;
+            phone = target.value.replace(/\D/g, '');
+            element = $(target);
+            element.unmask();
+            
+            if (phone.length > 10) {
+                element.mask("(99) 99999-999?9");
+            } else {
+                element.mask("(99) 9999-9999?9");
+            }
+            }catch(err){
+        
+            }
     });
 
 
@@ -1710,29 +1727,29 @@ function masksForms() {
     $('.cnpj').mask("99.999.999/9999-99");
     $(".maskDate").mask("99/99/9999");
 
-	$.mask.definitions['H'] = "[0-2]";
-	$.mask.definitions['M'] = "[0-5]";
-	$.mask.definitions['h'] = "[A-Z-a-z]";
-	
-	$('.maskPlaca').mask("hhh-9999");
+    $.mask.definitions['H'] = "[0-2]";
+    $.mask.definitions['M'] = "[0-5]";
+    $.mask.definitions['h'] = "[A-Z-a-z]";
+    
+    $('.maskPlaca').mask("hhh-9999");
 
-	$('.maskHora').mask("H9:M9");
+    $('.maskHora').mask("H9:M9");
 
-	//$('.maskNumero').attr("type", "number");
-	
-	$('.maskNumero').on('keypress', function(ev) {
+    //$('.maskNumero').attr("type", "number");
+    
+    $('.maskNumero').on('keypress', function(ev) {
     var keyCode = window.event ? ev.keyCode : ev.which;
-		//codes for 0-9
-		if (keyCode < 48 || keyCode > 57) {
-			//codes for backspace, delete, enter
-			if (keyCode != 0 && keyCode != 8 && keyCode != 13 && !ev.ctrlKey) {
-				ev.preventDefault();
-			}
-		}
-	});
+        //codes for 0-9
+        if (keyCode < 48 || keyCode > 57) {
+            //codes for backspace, delete, enter
+            if (keyCode != 0 && keyCode != 8 && keyCode != 13 && !ev.ctrlKey) {
+                ev.preventDefault();
+            }
+        }
+    });
 
 
-	$('.maskValor').maskMoney({symbol:'R$ ', thousands:'.', decimal:',', symbolStay: true});
+    $('.maskValor').maskMoney({symbol:'R$ ', thousands:'.', decimal:',', symbolStay: true});
 
     $(".maskDate").datepicker({
         dateFormat: 'dd/mm/yy',
@@ -2014,11 +2031,11 @@ this.each(function() {
 var currentElement = $(this);
 
 });
-		
+        
 //alert(settings.option);
 //$(this).css("display", "none");
-		
-		
+        
+        
 return this; 
 };
 $.fn.myPlugin.defaults = defaults; 

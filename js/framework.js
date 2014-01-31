@@ -221,9 +221,29 @@ function browser() {
                 if (!settings.slides) {
 
                     if (settings.thumb) {
-                        $(thebanner).find(".the-banner-controls ul").append("<li><a data-index=" + index + "><img src='" + $(this).attr("data-thumb") + "'/></a></li>");
+                        $(thebanner).find(".the-banner-controls ul").append("<li><a data-index=" + index + "><img src='" + $(this).attr("data-thumb") + "'   /></a></li>");
+                        
+                        w = Number($(this).attr("data-thumb-width"));
+                        h = Number($(this).attr("data-thumb-height"));
+
                         $(thebanner).find(".the-banner-controls ul > li a").css("width", "auto");
                         $(thebanner).find(".the-banner-controls ul > li a").css("height", "auto");
+
+                        if(w != "undefined"){
+                            $(thebanner).find(".the-banner-controls ul > li a img").css("width", w);
+                        }else{
+                            $(thebanner).find(".the-banner-controls ul > li a img").css("width", "auto");
+                        }
+                        
+
+
+                        if(h != "undefined"){
+                            $(thebanner).find(".the-banner-controls ul > li a img").css("height", h);
+                        }else{
+                            $(thebanner).find(".the-banner-controls ul > li a img").css("height", "auto");
+                        }
+                        
+                        
 
                     } else {
                         $(thebanner).find(".the-banner-controls ul").append("<li><a data-index=" + index + "></a></li>");
@@ -1426,7 +1446,8 @@ $(this).find("> .menu-submenu").css("display", "none");
         rangeAnchor: 200,
         labelButtonMenu: "",
         htmlMiniBar: "",
-        totalLevel: 3
+        totalLevel: 3,
+        cleanSpaces:true
     };
 
     $.fn.themenu = function (options) {
@@ -1440,6 +1461,11 @@ $(this).find("> .menu-submenu").css("display", "none");
         this.each(function () {
             var currentElement = $(this);
         });
+
+
+
+
+
 
         if (settings.isAnchor) {
 
@@ -1463,10 +1489,16 @@ $(this).find("> .menu-submenu").css("display", "none");
 
         if (settings.responsive) {
             
-            function createMenu() {
+            createMenu();
+            responsiveMenu();
+            $(window).resize(function () {
+                responsiveMenu();
+            });
 
+        }
+            
+        function createMenu() {
                 $('body').prepend("<div class='the-menu-minibar'><a class='the-menu-ico btn'>" + settings.labelButtonMenu + "</a>" + settings.htmlMiniBar + "</div>");
-
 
                 $('body').prepend("<div class='the-menu-responsive'></div>");
                 $('.the-menu-responsive').html(estruturaMenu);
@@ -1504,53 +1536,45 @@ $(this).find("> .menu-submenu").css("display", "none");
                         });
                         toogleMenu = true;
                     }
-                });
-
-            createMenu();
-            responsiveMenu();
-            $(window).resize(function () {
-                responsiveMenu();
-            });
-
-            function responsiveMenu() {
-
-
-                if (!toogleMenu) {
-                    $(settings.base).stop().css("margin-left", "0px");
-                    $('.the-menu-minibar').stop().css("margin-left", "0px");
-                    $('.the-menu-responsive').stop().animate({ left: -$('.the-menu-responsive').width() }, 0, function () {
-                        //$(settings.base).css('width', '100%');
-                    });
-                    toogleMenu = true;
-                }
-
-                $('.the-menu-responsive').css('minHeight', $(window).height());
-
-
-                if ($(window).width() < settings.minWidth) {
-                    This.css('display', 'none');
-                    $('.the-menu-minibar').css('display', 'block');
-                } else {
-                    $('.the-menu-minibar').css('display', 'none');
-                    This.css('display', '');
-                    //This.html(estruturaMenu);
-                    $('.the-menu-responsive').css('left', -$('.the-menu-responsive').width());
-                    $(settings.base).css('margin-left', 0);
-                    toogleMenu = true;
-                    $('body').css('overflow-x', '');
-                    addOver();
-                }
-
-            }
-
-
+                });                
+        } 
             
 
+                      
+    
+
+       function responsiveMenu() {
 
 
-
+            if (!toogleMenu) {
+                $(settings.base).stop().css("margin-left", "0px");
+                $('.the-menu-minibar').stop().css("margin-left", "0px");
+                $('.the-menu-responsive').stop().animate({ left: -$('.the-menu-responsive').width() }, 0, function () {
+                    //$(settings.base).css('width', '100%');
+                });
+                toogleMenu = true;
             }
+
+            $('.the-menu-responsive').css('minHeight', $(window).height());
+
+
+            if ($(window).width() < settings.minWidth) {
+                This.css('display', 'none');
+                $('.the-menu-minibar').css('display', 'block');
+            } else {
+                $('.the-menu-minibar').css('display', 'none');
+                This.css('display', '');
+                //This.html(estruturaMenu);
+                $('.the-menu-responsive').css('left', -$('.the-menu-responsive').width());
+                $(settings.base).css('margin-left', 0);
+                toogleMenu = true;
+                $('body').css('overflow-x', '');
+                addOver();
+            }
+
         }
+
+
 
         /** Sub Menu **************/
         var n = 1;
@@ -1595,6 +1619,17 @@ $(this).find("> .menu-submenu").css("display", "none");
         }
         /** end: Sub Menu **************/
 
+
+        if(settings.cleanSpaces){
+          cleanSpaces();  
+        }
+        
+        function cleanSpaces(){
+            This.find("a").each(function(){
+                $(this).html($(this).text().replace(/\s/g, '&nbsp;'));
+            })
+        }
+            
 
 
 

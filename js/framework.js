@@ -892,8 +892,7 @@ function browser() {
                             $('.thebox-content').css('height', div.outerHeight());
                         }
                         
-                        //alert(div.find("div").outerHeight());
-
+                        
 
                          
 
@@ -1173,6 +1172,8 @@ function browser() {
 
 
             function remove() {
+               
+
                 $(".thebox-content").unbind('click');
 
                 $('.thebox-bg').stop().animate({ opacity: 0 }, settings.timer);
@@ -1189,14 +1190,16 @@ function browser() {
                     $("#" + This.attr("href")).appendTo(parentDiv);
                     $("#" + This.attr("href")).css("display", "none");
                     $("#" + This.attr("href")).css("width", $("#" + This.attr("href")).width());
-                    $("#" + This.attr("href")).css("width", "");
-                    $("#" + This.attr("href")).css("height", "");
+                    $("#" + This.attr("href")).css("height", $("#" + This.attr("href")).height());
                     
+
+
                     if (This.attr('data-iframe')) {
                         $('#thebox-iframe').remove();
                     }
 
                 }
+
 
 
             }

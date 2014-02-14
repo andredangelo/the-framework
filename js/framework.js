@@ -1466,7 +1466,7 @@ $(this).find("> .menu-submenu").css("display", "none");
         });
 
 
-
+		This.addClass('the-menu');
 
 
 
@@ -1484,7 +1484,14 @@ $(this).find("> .menu-submenu").css("display", "none");
                         This.find('a').removeClass("active");
                         This.find('a').eq(n).addClass("active");
                     }
+                    
+                    if($(window).scrollTop() < $(arrMenu[0].attr('href')).offset().top - settings.rangeAnchor){
+	                    This.find('a').removeClass("active");
+	                    
+                    }
+                    
                 }
+                
             });
 
         }

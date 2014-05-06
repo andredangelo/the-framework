@@ -756,6 +756,7 @@ function browser() {
 
 
 
+
 /** Component: The Box **/
 (function ($) {
 
@@ -935,7 +936,6 @@ function browser() {
                            
                            var larguraTotal = $(window).width();
                            var larguraBox2 = $(".thebox-content").outerWidth();
-                            
                             
                             if(larguraBox2 >= larguraTotal-40){
                                
@@ -1134,32 +1134,37 @@ function browser() {
 
                         /* Resize  Default*/
                         $(window).resize(function () {
+                           
                             $(".thebox-content img").css("width", "");
                             $(".thebox-content img").css("height", "");
 
-                            if ($(".thebox-content img").width() >= $(window).width() - 200) {
-                                $(".thebox-content img").css("width", $(window).width() - 200);
-                                $(".thebox-content img").css("height", "auto");
-                            }
-                            if ($(".thebox-content img").width() >= $(window).height() - 200) {
-                                $(".thebox-content img").css("height", $(window).height() - 200);
-                            }
+	                        if ($(".thebox-content img").width() >= $(window).width() - 200) {
+	                            $(".thebox-content img").css("width", $(window).width() - 200);
+	                            $(".thebox-content img").css("height", "auto");
+	                        }
+	                        if($(".thebox-content img").height() >= $(window).height() - 200){
+		                       	$(".thebox-content img").css("height", $(window).height() - 200);
+	                            $(".thebox-content img").css("width", "auto"); 
+	                        }
+
 
                             var top = $(".thebox-content").height() / 2;
                             $(".thebox-content #thebox-controls").css("top", top);
 
-                            $(".thebox-content img").css("height", "auto");
                             $(".thebox-content").css("top", scrollAtual + $(window).height() / 2);
                             $(".thebox-content").css("margin-left", -($(".thebox-content").width() / 2 + Number($(".thebox-content").css("padding-left").replace("px", ""))));
                             $(".thebox-content").css("margin-top", -$(".thebox-content").height() / 2);                         
                             
 
                             $(".thebox-bg").css("width", $(window).width());
-                       
-
                             
                         });
+                        
+
+                        
                         /* end: Resize */
+
+
 
 
                         $(".thebox-content img").load(function () {
@@ -1202,6 +1207,36 @@ function browser() {
 
                             $(".thebox-content").css("margin-left", -($(".thebox-content").outerWidth()) / 2);
                             $(".thebox-content").css("margin-top", -($(".thebox-content").outerHeight()) / 2);
+							
+							
+							
+							
+							/* RESIZE */
+	
+	                        if ($(".thebox-content img").width() >= $(window).width() - 200) {
+	                        
+	                            $(".thebox-content img").css("width", $(window).width() - 200);
+	                            $(".thebox-content img").css("height", "auto");
+	                            
+	                        }
+	                        if($(".thebox-content img").height() >= $(window).height() - 200){
+		                       	$(".thebox-content img").css("height", $(window).height() - 200);
+	                            $(".thebox-content img").css("width", "auto"); 
+	                        }
+	                        
+	                        
+	                        
+	
+	                        var top = $(".thebox-content").height() / 2;
+	                        $(".thebox-content #thebox-controls").css("top", top);
+	
+
+	                        $(".thebox-content").css("top", scrollAtual + $(window).height() / 2);
+	                        $(".thebox-content").css("margin-left", -($(".thebox-content").width() / 2 + Number($(".thebox-content").css("padding-left").replace("px", ""))));
+	                        $(".thebox-content").css("margin-top", -$(".thebox-content").height() / 2);                         
+	                        
+	
+	                        $(".thebox-bg").css("width", $(window).width());                        
 
 
 
@@ -1300,6 +1335,7 @@ function browser() {
 
 })(jQuery);
 /** end Component: The Box **/
+
 
 
 

@@ -1436,7 +1436,6 @@ $(this).find("> .menu-submenu").css("display", "none");
 
 
 
-
 /*Component: Menu Responsive **/
 (function ($) {
 
@@ -1466,7 +1465,7 @@ $(this).find("> .menu-submenu").css("display", "none");
         });
 
 
-		This.addClass('the-menu');
+
 
 
 
@@ -1484,14 +1483,7 @@ $(this).find("> .menu-submenu").css("display", "none");
                         This.find('a').removeClass("active");
                         This.find('a').eq(n).addClass("active");
                     }
-                    
-                    if($(window).scrollTop() < $(arrMenu[0].attr('href')).offset().top - settings.rangeAnchor){
-	                    This.find('a').removeClass("active");
-	                    
-                    }
-                    
                 }
-                
             });
 
         }
@@ -1605,9 +1597,13 @@ $(this).find("> .menu-submenu").css("display", "none");
             }
 
         }
-
+        
+        var principal;
         function fOver(event) {
 
+            principal = $(this);
+            principal.find('a').addClass('hovered');
+            
             topStartMenu = $(this).height();
             leftMenu = $(this).width();
 
@@ -1620,11 +1616,17 @@ $(this).find("> .menu-submenu").css("display", "none");
             }
 
             $(this).find("> .menu-submenu").css("display", "block");
+            
+            
+            
+            
+            
         }
 
         function fOut(event) {
 
             $(this).find("> .menu-submenu").css("display", "none");
+            principal.find('a').removeClass('hovered');
 
         }
         /** end: Sub Menu **************/
@@ -1651,6 +1653,7 @@ $(this).find("> .menu-submenu").css("display", "none");
 
 })(jQuery);
 /*Component: Menu Responsive **/
+
 
 
 

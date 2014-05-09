@@ -1703,13 +1703,11 @@ $(this).find("> .menu-submenu").css("display", "none");
             }
 
         }
-<<<<<<< HEAD
-        
+
         var principal;
-=======
-		
+
 		var principal;
->>>>>>> 691fbcbaff9f52f7ecc6f43fd116a0e7f0f40529
+
         function fOver(event) {
 
             principal = $(this);

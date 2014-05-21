@@ -757,6 +757,7 @@ function browser() {
 
 
 
+
 /** Component: The Box **/
 (function ($) {
 
@@ -1138,14 +1139,14 @@ function browser() {
                             $(".thebox-content img").css("width", "");
                             $(".thebox-content img").css("height", "");
 
-	                        if ($(".thebox-content img").width() >= $(window).width() - 200) {
-	                            $(".thebox-content img").css("width", $(window).width() - 200);
-	                            $(".thebox-content img").css("height", "auto");
-	                        }
-	                        if($(".thebox-content img").height() >= $(window).height() - 200){
-		                       	$(".thebox-content img").css("height", $(window).height() - 200);
-	                            $(".thebox-content img").css("width", "auto"); 
-	                        }
+                            if ($(".thebox-content img").width() >= $(window).width() - 200) {
+                                $(".thebox-content img").css("width", $(window).width() - 200);
+                                $(".thebox-content img").css("height", "auto");
+                            }
+                            if($(".thebox-content img").height() >= $(window).height() - 200){
+                                $(".thebox-content img").css("height", $(window).height() - 200);
+                                $(".thebox-content img").css("width", "auto"); 
+                            }
 
 
                             var top = $(".thebox-content").height() / 2;
@@ -1207,36 +1208,36 @@ function browser() {
 
                             $(".thebox-content").css("margin-left", -($(".thebox-content").outerWidth()) / 2);
                             $(".thebox-content").css("margin-top", -($(".thebox-content").outerHeight()) / 2);
-							
-							
-							
-							
-							/* RESIZE */
-	
-	                        if ($(".thebox-content img").width() >= $(window).width() - 200) {
-	                        
-	                            $(".thebox-content img").css("width", $(window).width() - 200);
-	                            $(".thebox-content img").css("height", "auto");
-	                            
-	                        }
-	                        if($(".thebox-content img").height() >= $(window).height() - 200){
-		                       	$(".thebox-content img").css("height", $(window).height() - 200);
-	                            $(".thebox-content img").css("width", "auto"); 
-	                        }
-	                        
-	                        
-	                        
-	
-	                        var top = $(".thebox-content").height() / 2;
-	                        $(".thebox-content #thebox-controls").css("top", top);
-	
+                            
+                            
+                            
+                            
+                            /* RESIZE */
+    
+                            if ($(".thebox-content img").width() >= $(window).width() - 200) {
+                            
+                                $(".thebox-content img").css("width", $(window).width() - 200);
+                                $(".thebox-content img").css("height", "auto");
+                                
+                            }
+                            if($(".thebox-content img").height() >= $(window).height() - 200){
+                                $(".thebox-content img").css("height", $(window).height() - 200);
+                                $(".thebox-content img").css("width", "auto"); 
+                            }
+                            
+                            
+                            
+    
+                            var top = $(".thebox-content").height() / 2;
+                            $(".thebox-content #thebox-controls").css("top", top);
+    
 
-	                        $(".thebox-content").css("top", scrollAtual + $(window).height() / 2);
-	                        $(".thebox-content").css("margin-left", -($(".thebox-content").width() / 2 + Number($(".thebox-content").css("padding-left").replace("px", ""))));
-	                        $(".thebox-content").css("margin-top", -$(".thebox-content").height() / 2);                         
-	                        
-	
-	                        $(".thebox-bg").css("width", $(window).width());                        
+                            $(".thebox-content").css("top", scrollAtual + $(window).height() / 2);
+                            $(".thebox-content").css("margin-left", -($(".thebox-content").width() / 2 + Number($(".thebox-content").css("padding-left").replace("px", ""))));
+                            $(".thebox-content").css("margin-top", -$(".thebox-content").height() / 2);                         
+                            
+    
+                            $(".thebox-bg").css("width", $(window).width());                        
 
 
 
@@ -1335,6 +1336,9 @@ function browser() {
 
 })(jQuery);
 /** end Component: The Box **/
+
+
+
 
 
 

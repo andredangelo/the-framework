@@ -1069,25 +1069,35 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4c4c4c', end
 }
 
 .thebox-content{
-	padding:20px;
-	position:absolute;
-	z-index:9998;
-	
-	min-width:30px;
-	min-height:30px;
-	
-	background-color:#FFF;
-	
-	-webkit-border-radius: 10px;
-	-moz-border-radius: 10px;
-	border-radius: 10px;
-	
-	-webkit-box-shadow: 0px 2px 5px rgba(50, 50, 50, 0.75);
-	-moz-box-shadow:    0px 2px 5px rgba(50, 50, 50, 0.75);
-	box-shadow:         0px 2px 5px rgba(50, 50, 50, 0.75);	
+			padding:20px;
+			position:absolute;
+			z-index:9998;
+			
+			min-width:30px;
+			min-height:30px;
+			
+			background-color:#FFF;
+			
+		    -webkit-box-sizing: content-box;
+		       -moz-box-sizing:content-box;
+		            box-sizing: content-box;
+			
+			-webkit-border-radius: 10px;
+			-moz-border-radius: 10px;
+			border-radius: 10px;
+			
+			-webkit-box-shadow: 0px 2px 5px rgba(50, 50, 50, 0.75);
+			-moz-box-shadow:    0px 2px 5px rgba(50, 50, 50, 0.75);
+			box-shadow:         0px 2px 5px rgba(50, 50, 50, 0.75);	
 	
 }
 	
+.thebox-content *{
+			    -webkit-box-sizing: border-box;
+		       -moz-box-sizing: border-box;
+		            box-sizing: border-box;
+}
+
 	.thebox-loader{
 		background-image:url(../img/framework/loader.gif);
 		background-repeat:no-repeat;
@@ -1098,9 +1108,23 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4c4c4c', end
 	.thebox-content .relative{
 		position:relative;	
 	}
+
+	.thebox-content h3 {
+		position: absolute;
+		top: 0;
+		background: rgba(0,0,0,.5);
+		color: #fff;
+		margin: 0;
+		font-family: Arial,Verdana;
+		width: 100%;
+		padding: 8px;
+		text-align: center;
+	}
+
 	
 	.thebox-content #thebox-close{
 		position:absolute;
+		display:block;
 		z-index:9999;
 		padding:5px;
 		font-family:Helvetica, Arial, sans-serif;
@@ -1108,15 +1132,18 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4c4c4c', end
 		font-size:10px;
 		background-color:#333;
 		text-align:center;
-		width:10px;
-		height:10px;
 		color:#fff;
-		
+		width: 23px; height: 23px;
+
 		cursor:pointer;
 		-webkit-border-radius: 50px;
 		-moz-border-radius: 50px;
 		border-radius: 50px;
-		
+
+				    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+
 		-webkit-box-shadow: 0px 2px 5px rgba(50, 50, 50, 0.75);
 		-moz-box-shadow:    0px 2px 5px rgba(50, 50, 50, 0.75);
 		box-shadow:         0px 2px 5px rgba(50, 50, 50, 0.75);	

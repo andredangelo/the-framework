@@ -1160,28 +1160,36 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4c4c4c', end
 	.thebox-content #thebox-controls{position:relative;}
 	
 	.thebox-content .thebox-control{
-		display:none;
-		
-		position:absolute;
-		z-index:9999;
-		padding:8px;
-		font-family:Helvetica, Arial, sans-serif;
-		font-weight:bold;
-		font-size:10px;
-		background-color:#fff;
-		text-align:center;
-		width:10px;
-		height:10px;
-		color:#666;
-		
-		cursor:pointer;
-		-webkit-border-radius: 50px;
-		-moz-border-radius: 50px;
-		border-radius: 50px;
-		
-		-webkit-box-shadow: 0px 2px 5px rgba(50, 50, 50, 0.75);
-		-moz-box-shadow:    0px 2px 5px rgba(50, 50, 50, 0.75);
-		box-shadow:         0px 2px 5px rgba(50, 50, 50, 0.75);	
+				display:none;
+				
+				position:absolute;
+				z-index:9999;
+				padding:10px;
+				font-family:Helvetica, Arial, sans-serif;
+				font-weight:bold;
+				font-size:10px;
+				background-color:#fff;
+				text-align:center;
+				width:30px;
+				height:30px; margin-top: -15px; //metade a half
+				line-height: 15px;
+				text-align: center;
+				color:#666;
+				
+				cursor:pointer;
+				-webkit-border-radius: 50px;
+				-moz-border-radius: 50px;
+				border-radius: 50px;
+				-webkit-box-sizing: border-box;
+		       -moz-box-sizing: border-box;
+		            box-sizing: border-box;
+				
+				-webkit-box-shadow: 0px 2px 5px rgba(50, 50, 50, 0.75);
+				-moz-box-shadow:    0px 2px 5px rgba(50, 50, 50, 0.75);
+				box-shadow:         0px 2px 5px rgba(50, 50, 50, 0.75);	
+
+				font-weight: bold;
+				font-size: 12px;
 	}
 	
 	.thebox-content .thebox-control:hover{
@@ -1193,7 +1201,18 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4c4c4c', end
 		transition: all .3s linear;
 	}
 	
-	
+				#thebox-controls #thebox-control-left{
+					left:5px;
+				-webkit-box-sizing: border-box;
+		       -moz-box-sizing: border-box;
+		            box-sizing: border-box;
+				}
+				#thebox-controls #thebox-control-right{
+					right:5px;
+				-webkit-box-sizing: border-box;
+		       -moz-box-sizing: border-box;
+		            box-sizing: border-box;
+				}
 
 
 

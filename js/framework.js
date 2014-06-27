@@ -896,7 +896,7 @@ function browser() {
                             
                             $('.thebox-content').css('height', div.attr("data-height"));
                         } else {
-                            $('.thebox-content').css('height', 'auto');
+                            $('.thebox-content').css('height', div.outerHeight());
                         }
                         
 
@@ -1709,7 +1709,7 @@ $(this).find("> .menu-submenu").css("display", "none");
 
         var principal;
 
-		var principal;
+        var principal;
 
         function fOver(event) {
 
@@ -1923,6 +1923,9 @@ function masksForms() {
         nextText: 'Próximo',
         prevText: 'Anterior'
     });
+
+
+    
 }
 /** end: Component: Masks **/
 

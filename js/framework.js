@@ -1550,7 +1550,7 @@ $(this).find("> .menu-submenu").css("display", "none");
 
     var defaults = {
         minWidth: 500,
-        time: 1000,
+        time: 500,
         base: "#base",
         responsive: true,
         isAnchor: false,
@@ -1572,8 +1572,6 @@ $(this).find("> .menu-submenu").css("display", "none");
         this.each(function () {
             var currentElement = $(this);
         });
-
-
 
 
 
@@ -1607,6 +1605,131 @@ $(this).find("> .menu-submenu").css("display", "none");
             });
 
         }
+
+        /* !Side Menu */
+        if (settings.type == "side") {
+
+            createSideMenu();
+
+        }else{
+            if(settings.cleanSpaces){
+              cleanSpaces();  
+            }
+            
+
+            function cleanSpaces(){
+                This.find("a").each(function(){
+                    $(this).html($(this).text().replace(/\s/g, '&nbsp;'));
+                })
+            }
+
+            
+        }
+
+        function createSideMenu(){
+
+            var nav = This.find("> nav");
+            var diferenca = This.outerWidth() - $(nav).outerWidth();
+
+            /* Align base to right */
+            $(settings.base).css("padding-left", $(nav).outerWidth());
+
+            /* Create Black Cover */
+            $('body').prepend("<div class='the-menu-side-cover'></div>");
+           
+            /* Align menu visible */
+            This.css("left", -diferenca)
+
+
+            /*Width options*/
+            This.find(".options").css("width", diferenca);
+
+            /* Each Li */
+            This.find(".main > ul > li").each(function(index){
+                
+
+                /* BG Icon */
+                var icon = $(this).attr("data-icon")
+                if(icon){
+                   $(this).find("> a").css("background-image", "url(" + icon +  ")");
+                }
+
+                $(this).find(">a").attr("data-eq", index)
+
+            });
+
+
+
+            var itemAtual = -1;
+            /* Click */
+            This.find(".main > ul > li > a").click(function(){
+
+                This.find(".main > ul > li > a").removeClass("active");
+                $(this).addClass("active");
+
+                if($(this).parent("li").find(".sub-side").length){
+
+                    event.preventDefault();
+
+                    if(itemAtual == $(this).attr("data-eq")){
+                        
+                        remover($(this));
+
+                    }else{
+
+                        adicionar($(this));
+
+                    }
+
+                    
+                    
+                }
+
+            });
+
+
+            function remover(t){
+                $(t).removeClass("active");
+                $(".the-menu-side-cover").unbind("click");
+                This.stop().animate({left:-diferenca}, settings.time);
+
+                $(settings.base).stop().animate({paddingLeft:$(nav).outerWidth()}, settings.time, function(){
+
+                   This.find(".options > div").remove();
+
+                });
+
+                $(".the-menu-side-cover").animate({opacity:0}, settings.time, function(){
+                    $(".the-menu-side-cover").css("display", "none");
+                });
+
+                itemAtual = -1;
+            }
+
+            function adicionar(t){
+                This.stop().animate({left:0}, settings.time);
+                $(settings.base).stop().animate({paddingLeft:This.outerWidth()}, settings.time);
+                
+                This.find(".options").html("");
+                This.find(".options").html($(t).parent().find(".sub-side").html());
+                
+                if($(".the-menu-side-cover").css("display") == "block"){
+
+                }else{
+                    $(".the-menu-side-cover").css("display", "block");
+                    $(".the-menu-side-cover").animate({opacity:0}, 0);
+                    $(".the-menu-side-cover").animate({opacity:1}, settings.time);  
+                    $(".the-menu-side-cover").click(function(){
+                        remover(t);
+                    });
+
+                }
+           
+                itemAtual = $(t).attr("data-eq");
+            }
+        }
+
+
             
         function createMenu() {
                 $('body').prepend("<div class='the-menu-minibar'><a class='the-menu-ico btn'>" + settings.labelButtonMenu + "</a>" + settings.htmlMiniBar + "</div>");
@@ -1654,17 +1777,8 @@ $(this).find("> .menu-submenu").css("display", "none");
                       
     
 
-       function responsiveMenu() {
+        function responsiveMenu() {
 
-
-            if (!toogleMenu) {
-                $(settings.base).stop().css("margin-left", "0px");
-                $('.the-menu-minibar').stop().css("margin-left", "0px");
-                $('.the-menu-responsive').stop().animate({ left: -$('.the-menu-responsive').width() }, 0, function () {
-                    //$(settings.base).css('width', '100%');
-                });
-                toogleMenu = true;
-            }
 
             $('.the-menu-responsive').css('minHeight', $(window).height());
 
@@ -1677,7 +1791,7 @@ $(this).find("> .menu-submenu").css("display", "none");
                 This.css('display', '');
                 //This.html(estruturaMenu);
                 $('.the-menu-responsive').css('left', -$('.the-menu-responsive').width());
-                $(settings.base).css('margin-left', 0);
+                $(settings.base).css('margin-left', '');
                 toogleMenu = true;
                 $('body').css('overflow-x', '');
                 addOver();
@@ -1687,73 +1801,61 @@ $(this).find("> .menu-submenu").css("display", "none");
 
 
 
-        /** Sub Menu **************/
-        var n = 1;
-        var stMenu = ".level";
-        var stMenu2 = "";
-        var topStartMenu = 0;
+            /** Sub Menu **************/
+            var n = 1;
+            var stMenu = ".level";
+            var stMenu2 = "";
+            var topStartMenu = 0;
 
-        addOver();
-        function addOver() {
-            n = 1;
+            addOver();
+            function addOver() {
+                n = 1;
 
-            for (n; n <= settings.totalLevel; n++) {
+                for (n; n <= settings.totalLevel; n++) {
 
-                stMenu2 += stMenu + n + ">";
-                $(stMenu + n).mouseover({ param1: n, param2: stMenu + n }, fOver);
-                $(stMenu + n).mouseleave({ param1: n, param2: stMenu + n }, fOut);
+                    stMenu2 += stMenu + n + ">";
+                    $(stMenu + n).mouseover({ param1: n, param2: stMenu + n }, fOver);
+                    $(stMenu + n).mouseleave({ param1: n, param2: stMenu + n }, fOut);
+
+                }
 
             }
-
-        }
-
-        var principal;
-
-        var principal;
-
-        function fOver(event) {
-
-            principal = $(this);
-            principal.find('a').addClass('hovered');
             
-            topStartMenu = $(this).height();
-            leftMenu = $(this).width();
+            var principal;
+            function fOver(event) {
 
-            var menuAbrir = event.data.param2 + " > .menu-submenu";
+                principal = $(this);
+                principal.find('a').addClass('hovered');
+                
+                topStartMenu = $(this).height();
+                leftMenu = $(this).width();
 
-            if (event.data.param1 == 1) {
-                $(menuAbrir).css("top", topStartMenu);
-            } else {
-                $(menuAbrir).css("left", $(this).width());
+                var menuAbrir = event.data.param2 + " > .menu-submenu";
+
+                if (event.data.param1 == 1) {
+                    $(menuAbrir).css("top", topStartMenu);
+                } else {
+                    $(menuAbrir).css("left", $(this).width());
+                }
+
+                $(this).find("> .menu-submenu").css("display", "block");
+                
+                
+                
+                
+                
             }
 
-            $(this).find("> .menu-submenu").css("display", "block");
-            
-            
-            
-            
-            
-        }
+            function fOut(event) {
 
-        function fOut(event) {
+                $(this).find("> .menu-submenu").css("display", "none");
+                principal.find('a').removeClass('hovered');
 
-            $(this).find("> .menu-submenu").css("display", "none");
-            principal.find('a').removeClass('hovered');
-
-        }
-        /** end: Sub Menu **************/
+            }
+            /** end: Sub Menu **************/
 
 
-        if(settings.cleanSpaces){
-          cleanSpaces();  
-        }
-        
-        function cleanSpaces(){
-            This.find("a").each(function(){
-                $(this).html($(this).text().replace(/\s/g, '&nbsp;'));
-            })
-        }
-            
+                
 
 
 
@@ -1765,6 +1867,7 @@ $(this).find("> .menu-submenu").css("display", "none");
 
 })(jQuery);
 /*Component: Menu Responsive **/
+
 
 
 

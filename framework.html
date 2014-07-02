@@ -2322,22 +2322,60 @@
                         <h3 class="iHtml">Menu</h3> <h3>Side</h3>
                         <ul>
                             <li>Create a div in <strong>< body >(outer #base)</strong> with id <strong>"menu-left"</strong>;</li>
-                            <li>Call <strong>menuLeft();</strong> function (toogleed);</li>
+                            <li>Call $('.the-menu-side').themenu({type:'side'});</li>
                         </ul>
                         <h5>Exemplo:</h5>            
                         <pre class="brush: js; hei200">  
                         
                         
-                        // Javascript
-                        menuLeft();
-                        
+                            <div class="the-menu-side">  
 
-                        // menu-left code:
-                            <div id="menu-left">
-    							<div class="pad20">
-                                	Content
-                           		</div>
-                           </div>
+                                <div class="options">
+                                    
+                                </div>
+
+                                <nav class="main">
+                                <a href="#"> </a>
+                                          <ul>
+                                              <li data-icon="img/menu/ico.png">
+                                                  <a href="#menu">Link</a>
+
+                                                  <span class="sub-side">
+                                                    <div>
+                                                        <ul>
+                                                            <li><a href="#menu">Link</a></li>
+                                                            <li><a href="#menu">Link</a></li>
+
+                                                        </ul>
+                                                    </div>
+                                                  </span>
+
+                                              </li>
+                                              <li data-icon="img/menu/ico.png">
+                                                  <a href="#menu">Link</a>
+                                              </li>
+                                              <li data-icon="img/menu/ico.png">
+                                                  <a href="#menu">Link</a>
+
+                                                  <span class="sub-side">
+                                                    <div>
+                                                        <ul>
+                                                            <li><a href="#menu">Link2</a></li>
+                                                            <li><a href="#menu">Link2</a></li>
+                                                            <li><a href="#menu">Link2</a></li>
+                                                            <li><a href="#menu">Link2</a></li>
+                                                        </ul>
+                                                    </div>
+                                                  </span>
+
+
+                                              </li>
+                                              <li data-icon="img/menu/ico.png">
+                                                  <a href="#menu">Link</a>
+                                              </li>
+                                          </ul>
+                                </nav>
+                            </div> 
 
                         
                         </pre>

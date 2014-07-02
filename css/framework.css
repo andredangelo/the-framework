@@ -842,7 +842,92 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4c4c4c', end
 		padding-left:20px;
 	}
 	
-	
+	/* !Side Menu */
+.the-menu-side {
+  position: fixed;
+  z-index: 999;
+  left: -500px;
+  top: 0px;
+  width: 340px;
+  height: 100%;
+  background: #fff;
+  -moz-box-shadow: 0px 2px 35px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: 0px 2px 35px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 2px 35px rgba(0, 0, 0, 0.3);
+  z-index: 9100;
+}
+.the-menu-side nav.main {
+  width: 90px;
+  height: 100%;
+  background: #fff;
+  float: right;
+  border-left: 1px solid #dbdbdb;
+}
+.the-menu-side nav.main ul li {
+  width: 100%;
+  display: block;
+  text-align: center;
+  border-bottom: 1px solid #e7eaec;
+}
+.the-menu-side nav.main ul li:first-of-type {
+  border-top: 1px solid #e7eaec;
+}
+.the-menu-side nav.main ul li > a {
+  font-size: 11px;
+  padding: 45px 10px 15px 10px;
+  display: block;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: #909090;
+  background-position: center 5px;
+  background-repeat: no-repeat;
+}
+.the-menu-side nav.main ul li > a:hover {
+  background-position: bottom;
+  -moz-box-shadow: inset 0px 0px 8px rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: inset 0px 0px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0px 0px 8px rgba(0, 0, 0, 0.2);
+  color: #1a90c3;
+}
+.the-menu-side nav.main ul li > a.active {
+  background-position: bottom;
+  -moz-box-shadow: inset 0px 0px 45px rgba(0, 0, 0, 0.13);
+  -webkit-box-shadow: inset 0px 0px 45px rgba(0, 0, 0, 0.13);
+  box-shadow: inset 0px 0px 45px rgba(0, 0, 0, 0.13);
+  color: #1a90c3;
+}
+.the-menu-side .sub-side {
+  display: none;
+}
+.the-menu-side .options {
+  float: left;
+}
+.the-menu-side .options > div > ul a {
+  width: 100%;
+  color: #909090;
+  display: block;
+  padding: 20px;
+  font-size: 12px;
+  border-bottom: 1px solid #dbdbdb;
+  text-transform: uppercase;
+}
+.the-menu-side .options > div > ul a:hover {
+  background: #efefef;
+  color: #1a90c3;
+  border-bottom: 1px solid #1a90c3;
+}
+.the-menu-side-cover {
+  background: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  display: none;
+  z-index: 9000;
+}
+
+
+
+
 	
 	
 /** Tab Menu **/

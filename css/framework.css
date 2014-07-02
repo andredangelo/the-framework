@@ -861,7 +861,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4c4c4c', end
   height: 100%;
   background: #fff;
   float: right;
-  border-left: 1px solid #dbdbdb;
+  /*border-left: 1px solid #dbdbdb;*/
 }
 .the-menu-side nav.main ul li {
   width: 100%;
@@ -870,7 +870,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4c4c4c', end
   border-bottom: 1px solid #e7eaec;
 }
 .the-menu-side nav.main ul li:first-of-type {
-  border-top: 1px solid #e7eaec;
+  /*border-top: 1px solid #e7eaec;*/
 }
 .the-menu-side nav.main ul li > a {
   font-size: 11px;

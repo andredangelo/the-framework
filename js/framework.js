@@ -1352,6 +1352,7 @@ function browser() {
 
 
 
+
 /** Component: Accordion **/
 (function ($) {
 
@@ -1375,9 +1376,9 @@ function browser() {
 
         });
 
-        $(this).find('div').css("display", "none");
+        $(this).find('> div').css("display", "none");
         if (settings.firstOn) {
-            $(this).find('div').first().css("display", "block");
+            $(this).find('> div').first().css("display", "block");
         }
 
 
@@ -1401,7 +1402,7 @@ function browser() {
             $(this).addClass("active");
 
 
-            This.find('div').each(function (index, element) {
+            This.find('> div').each(function (index, element) {
                 if (index == indexH2) {
                     $(this).stop().slideToggle(settings.speed);
                 }
@@ -1411,8 +1412,8 @@ function browser() {
 
             if (indexAntigo != indexH2) {
                 if (settings.closeOthers) {
-                    if (This.find('div:eq(' + indexAntigo + ')').css("display") == "block") {
-                        This.find('div:eq(' + indexAntigo + ')').slideToggle(settings.speed);
+                    if (This.find('> div:eq(' + indexAntigo + ')').css("display") == "block") {
+                        This.find('> div:eq(' + indexAntigo + ')').slideToggle(settings.speed);
                     }
                 }
             }
@@ -1431,6 +1432,7 @@ function browser() {
 
 })(jQuery);
 /** end: Component: Accordion **/
+
 
 
 

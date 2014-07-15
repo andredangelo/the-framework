@@ -1549,6 +1549,7 @@ $(this).find("> .menu-submenu").css("display", "none");
 
 
 
+
 /*Component: Menu Responsive **/
 (function ($) {
 
@@ -1562,7 +1563,11 @@ $(this).find("> .menu-submenu").css("display", "none");
         labelButtonMenu: "",
         htmlMiniBar: "",
         totalLevel: 3,
-        cleanSpaces:true
+        cleanSpaces:true,
+
+        /* Settings.type */
+        animateBase:false
+
     };
 
     $.fn.themenu = function (options) {
@@ -1607,6 +1612,7 @@ $(this).find("> .menu-submenu").css("display", "none");
             $(window).resize(function () {
                 responsiveMenu();
             });
+
 
         }
 
@@ -1658,7 +1664,7 @@ $(this).find("> .menu-submenu").css("display", "none");
                    $(this).find("> a").css("background-image", "url(" + icon +  ")");
                 }
 
-                $(this).find(">a").attr("data-eq", index)
+                $(this).find("> a").attr("data-eq", index)
 
             });
 
@@ -1712,7 +1718,11 @@ $(this).find("> .menu-submenu").css("display", "none");
 
             function adicionar(t){
                 This.stop().animate({left:0}, settings.time);
-                $(settings.base).stop().animate({paddingLeft:This.outerWidth()}, settings.time);
+                
+                if(settings.animateBase){
+                   $(settings.base).stop().animate({paddingLeft:This.outerWidth()}, settings.time); 
+                }
+                
                 
                 This.find(".options").html("");
                 This.find(".options").html($(t).parent().find(".sub-side").html());
@@ -1869,6 +1879,7 @@ $(this).find("> .menu-submenu").css("display", "none");
             /** end: Sub Menu **************/
 
 
+
                 
 
 
@@ -1881,6 +1892,8 @@ $(this).find("> .menu-submenu").css("display", "none");
 
 })(jQuery);
 /*Component: Menu Responsive **/
+
+
 
 
 

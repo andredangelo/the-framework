@@ -30,6 +30,8 @@ $(document).ready(function (e) {
     /** Component: scrollFixed **/
     //scrollFixed();
 
+    /*  Big */
+    fBig();
 
     /** Browser **/
     browser();
@@ -2239,41 +2241,61 @@ function scrollFixed(id) {
 
 
 
-/*
-$(document).ready(function () {
-var arrTable = new Array();
-//var arrTd = new Array('00', '01');
-var classTable = $(".divTableless table").attr("class");
 
-$(".divTableless").each(function () {
+/* BIG ***************************************/
 
-arrTable = new Array(); 
+function fBig(){
+  
+$(document).ready(function (e) {
 
-$(this).find("table tr > td").each(function (index) {
-arrTable.push($(this).html());
-});
+            $('#menuPrincipal').themenu({ minWidth: 885 });
 
-$(this).html("<ul class=" + classTable + ">");
+            $('input, textarea').focus(function () {
+                enter($(this));
+            });
 
-for (n = 0; n < arrTable.length; n++) {
-$(this).append("<li class=itemLoja" + n + ">" + arrTable[n] + "</li>")
+            $('input, textarea').focusout(function () {
+                $(document).unbind("keypress");
+            });
+
+
+            function enter(t) {
+
+                $(document).keypress(function (e) {
+
+                    if (e.which == 13) {
+                        e.preventDefault();
+
+                        var arr = new Array();
+                        arr[0] = $(t).parent();
+                        arr[1] = $(t).parent().parent();
+                        arr[2] = $(t).parent().parent().parent();
+                        arr[3] = $(t).parent().parent().parent().parent();
+                        arr[4] = $(t).parent().parent().parent().parent().parent();
+                        arr[5] = $(t).parent().parent().parent().parent().parent();
+
+
+                        var n = 0;
+                        for (n; n < 5; n++) {
+
+                            if (arr[n].find("input[type='submit']").attr("value")) {
+                                arr[n].find("input[type='submit']").click();
+
+                            } else {
+                            }
+
+                        }
+
+                    }
+                });
+
+            }
+
+
+        });
+
+
 }
-
-$(this).append("</ul>");
-});
-
-
-});
-
-*/
-
-
-
-
-
-
-
-
 
 
 

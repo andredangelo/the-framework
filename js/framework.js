@@ -1717,6 +1717,16 @@ $(this).find("> .menu-submenu").css("display", "none");
                 This.find(".options").html("");
                 This.find(".options").html($(t).parent().find(".sub-side").html());
                 
+                This.find('.options a').click(function(){
+
+                    var href = $(this).attr("href");
+
+                    if(href.charAt(0) == "#"){
+                        remover(t);
+                    }
+
+                });
+
                 if($(".the-menu-side-cover").css("display") == "block"){
 
                 }else{

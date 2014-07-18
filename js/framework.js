@@ -1566,6 +1566,7 @@ $(this).find("> .menu-submenu").css("display", "none");
         cleanSpaces:true,
 
         /* Settings.type */
+        type:"",
         animateBase:false
 
     };
@@ -1608,6 +1609,7 @@ $(this).find("> .menu-submenu").css("display", "none");
         if (settings.responsive) {
             
             createMenu();
+
             responsiveMenu();
             $(window).resize(function () {
                 responsiveMenu();
@@ -1616,25 +1618,28 @@ $(this).find("> .menu-submenu").css("display", "none");
 
         }
 
+
+
+
         /* !Side Menu */
         if (settings.type == "side") {
-
             createSideMenu();
 
         }else{
-            if(settings.cleanSpaces){
-              cleanSpaces();  
-            }
-            
+                
 
-            function cleanSpaces(){
+
+            if(settings.cleanSpaces){
                 This.find("a").each(function(){
                     $(this).html($(this).text().replace(/\s/g, '&nbsp;'));
-                })
+                }) 
+
             }
+            
 
             
         }
+
 
         function createSideMenu(){
 
@@ -1674,12 +1679,14 @@ $(this).find("> .menu-submenu").css("display", "none");
             /* Click */
             This.find(".main > ul > li > a").click(function(){
 
+
                 This.find(".main > ul > li > a").removeClass("active");
                 $(this).addClass("active");
 
-                if($(this).parent("li").find(".sub-side").length){
 
-                    event.preventDefault();
+                if($(this).parent("li").find(".sub-side").length){
+                    
+                    
 
                     if(itemAtual == $(this).attr("data-eq")){
                         
@@ -1688,6 +1695,7 @@ $(this).find("> .menu-submenu").css("display", "none");
                     }else{
 
                         adicionar($(this));
+
 
                     }
 
@@ -1717,6 +1725,9 @@ $(this).find("> .menu-submenu").css("display", "none");
             }
 
             function adicionar(t){
+
+
+
                 This.stop().animate({left:0}, settings.time);
                 
                 if(settings.animateBase){
@@ -1798,8 +1809,6 @@ $(this).find("> .menu-submenu").css("display", "none");
         } 
             
 
-                      
-    
 
         function responsiveMenu() {
 

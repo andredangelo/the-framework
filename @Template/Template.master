@@ -1,0 +1,138 @@
+﻿<!doctype html>
+<html>
+<head runat="server">
+<meta charset="utf-8">
+<title>Default Menu</title>
+
+
+<!-- Rel´s & Estilos -->
+
+    <link rel="stylesheet" href="/Conteudo/Templates/css/estilos.css" media="screen"/>
+    <link rel="stylesheet" href="/Conteudo/Templates/css/componentes.css" media="screen"/>
+    <link rel="stylesheet" href="/Conteudo/Templates/css/css/mobile.css" media="screen">
+
+<!-- /Rel´s & Estilos-->
+
+
+
+
+
+<!-- CONFIGURÁVEL -->
+    
+    <!-- Metas Tags Básicas -->
+       
+   
+        <meta name="robots" content="index, follow">
+        <meta name="resource-type" content="document" />
+        <meta name="revisit-after" content="1" />
+        <meta http-equiv="cleartype" content="on">
+    
+    
+    <!-- Imagem para Facebook -->
+    
+        <meta property="og:image" content="http://desenv.bigsolutions.com.br/experimental/img/mobile/facebook-logo.png"/> 
+        <link rel="image_src" href="http://www.site.com.br/img/mobile/facebook-logo.png" />
+        
+
+        
+    <!-- FavIcons  -->
+
+        <link rel="shortcut icon" href="http://www.site.com.br.img/mobile/apple-touch-icon.png">
+        <meta http-equiv="cleartype" content="on">
+        
+
+
+    
+
+
+
+
+
+
+<!-- Mobile viewport optimization -->
+	<meta name="HandheldFriendly" content="True">
+	<meta name="MobileOptimized" content="320">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0">
+
+
+    <meta http-equiv="imagetoolbar" content="no" />
+    <meta http-equiv="cache-control" content="public" />
+    <meta http-equiv="content-language" content="pt-BR" />
+
+
+
+</head>
+
+
+
+
+
+
+
+
+
+<body>
+
+<form runat="server">   
+       
+    <div id="base">
+    	
+
+        <div class="wrap">
+        
+            
+            
+            <!-- Header -->
+            <header id="header">
+
+            	  <asp:ContentPlaceHolder ID="Menu" runat="server" />
+
+            </header>
+
+           
+            
+            
+            
+            
+            
+            
+            <!-- Section -->
+            <section id="content">
+            	
+                <h1>Main Title</h1>
+
+                <p><asp:ContentPlaceHolder ID="Conteudo" runat="server" /></p>
+                
+            </section>
+
+            
+            
+            
+            
+            
+            
+            
+            <!-- Footer -->
+            <footer id="footer">
+            	
+                <asp:ContentPlaceHolder ID="Rodape" runat="server" />
+                
+            </footer>
+
+            
+        
+
+
+        </div> <!-- Wrap Ends -->
+        
+        
+    </div> <!-- Base Ends -->
+
+
+
+</form>
+
+</body>
+</html>

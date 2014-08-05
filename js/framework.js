@@ -1686,7 +1686,7 @@ $(this).find("> .menu-submenu").css("display", "none");
 
                 if($(this).parent("li").find(".sub-side").length){
                     
-                    
+                    event.preventDefault();
 
                     if(itemAtual == $(this).attr("data-eq")){
                         

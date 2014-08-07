@@ -760,6 +760,7 @@ function browser() {
 
 
 
+
 /** Component: The Box **/
 (function ($) {
 
@@ -772,6 +773,7 @@ function browser() {
         speed: 500,
         mini: false,
         animate: false,
+        margin: 200,
         base: "body",
 
         /*** Call Backs ***/
@@ -827,7 +829,7 @@ function browser() {
 
 
                 /* Add Content **/
-                $(settings.base).append('<div class="thebox-content"><div class="relative"><h3></h3><div id="thebox-close">X</div></div></div>');
+                $(settings.base).append('<div class="thebox-content"><div class="relative"><h3 style="display:none;"></h3><div id="thebox-close">X</div></div></div>');
                 $('.thebox-content').stop().animate({ opacity: 0 }, 0);
 
                 if(settings.mini){
@@ -889,8 +891,6 @@ function browser() {
                             $('.thebox-content').css('width', div.attr("data-width"));
                         } else {
                             $('.thebox-content').css('width', div.outerWidth());
-                            
-                            
                         }
 
 
@@ -898,8 +898,9 @@ function browser() {
                             
                             $('.thebox-content').css('height', div.attr("data-height"));
                         } else {
-                            $('.thebox-content').css('height', div.outerHeight());
+                            $('.thebox-content').css('height', 'auto');
                         }
+                        
                         
 
                          
@@ -1140,12 +1141,12 @@ function browser() {
                             $(".thebox-content img").css("width", "");
                             $(".thebox-content img").css("height", "");
 
-                            if ($(".thebox-content img").width() >= $(window).width() - 200) {
-                                $(".thebox-content img").css("width", $(window).width() - 200);
+                            if ($(".thebox-content img").width() >= $(window).width() - settings.margin) {
+                                $(".thebox-content img").css("width", $(window).width() - settings.margin);
                                 $(".thebox-content img").css("height", "auto");
                             }
-                            if($(".thebox-content img").height() >= $(window).height() - 200){
-                                $(".thebox-content img").css("height", $(window).height() - 200);
+                            if($(".thebox-content img").height() >= $(window).height() - settings.margin){
+                                $(".thebox-content img").css("height", $(window).height() - settings.margin);
                                 $(".thebox-content img").css("width", "auto"); 
                             }
 
@@ -1175,15 +1176,17 @@ function browser() {
                             $(".thebox-content img").css("display", "block");
                             $(".thebox-content img").animate({ opacity: 1 }, settings.speed);
 
-
+                            if(This.attr("data-title")){
+                                $(".thebox-content h3").css('display', 'block');
+                            }
 
                             if (settings.zoom100pct) {
                                 $(".thebox-content img").css("width", "");
                                 $(".thebox-content img").css("height", "");
 
-                                if ($(".thebox-content img").width() >= $(window).outerWidth() - 200) {
+                                if ($(".thebox-content img").width() >= $(window).outerWidth() - settings.margin) {
 
-                                    $(".thebox-content img").css("width", $(window).outerWidth() - 200);
+                                    $(".thebox-content img").css("width", $(window).outerWidth() - settings.margin);
                                     $(".thebox-content img").css("height", "auto");
                                 }
                             }
@@ -1215,14 +1218,14 @@ function browser() {
                             
                             /* RESIZE */
     
-                            if ($(".thebox-content img").width() >= $(window).width() - 200) {
+                            if ($(".thebox-content img").width() >= $(window).width() - settings.margin) {
                             
-                                $(".thebox-content img").css("width", $(window).width() - 200);
+                                $(".thebox-content img").css("width", $(window).width() - settings.margin);
                                 $(".thebox-content img").css("height", "auto");
                                 
                             }
-                            if($(".thebox-content img").height() >= $(window).height() - 200){
-                                $(".thebox-content img").css("height", $(window).height() - 200);
+                            if($(".thebox-content img").height() >= $(window).height() - settings.margin){
+                                $(".thebox-content img").css("height", $(window).height() - settings.margin);
                                 $(".thebox-content img").css("width", "auto"); 
                             }
                             
@@ -1337,6 +1340,8 @@ function browser() {
 
 })(jQuery);
 /** end Component: The Box **/
+
+
 
 
 
@@ -1641,6 +1646,7 @@ $(this).find("> .menu-submenu").css("display", "none");
         }
 
 
+
         function createSideMenu(){
 
             var nav = This.find("> nav");
@@ -1677,7 +1683,7 @@ $(this).find("> .menu-submenu").css("display", "none");
 
             var itemAtual = -1;
             /* Click */
-            This.find(".main > ul > li > a").click(function(){
+            This.find(".main > ul > li > a").click(function(e){
 
 
                 This.find(".main > ul > li > a").removeClass("active");
@@ -1687,6 +1693,7 @@ $(this).find("> .menu-submenu").css("display", "none");
                 if($(this).parent("li").find(".sub-side").length){
                     
                     event.preventDefault();
+                    
 
                     if(itemAtual == $(this).attr("data-eq")){
                         
@@ -1763,6 +1770,7 @@ $(this).find("> .menu-submenu").css("display", "none");
                 itemAtual = $(t).attr("data-eq");
             }
         }
+
 
 
             
@@ -2290,7 +2298,6 @@ $(document).ready(function (e) {
                 $(document).unbind("keypress");
             });
 
-
             function enter(t) {
 
                 $(document).keypress(function (e) {
@@ -2323,9 +2330,7 @@ $(document).ready(function (e) {
 
             }
 
-
         });
-
 
 }
 

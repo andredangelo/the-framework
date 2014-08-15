@@ -134,7 +134,6 @@ function browser() {
         /* Initial Settings  ***************************/
         function initialSettings() {
 
-
             /* Set width and height to Banner and ul and li 100%*/
             thebanner.css("width", settings.bannerWidth);
 
@@ -148,21 +147,21 @@ function browser() {
 
             thebanner.find(".thebanner-mask").css("overflow", "hidden");
 
-            thebanner.find(".thebanner-mask ul").css("width", settings.bannerWidth);
-            thebanner.find(".thebanner-mask ul").css("height", settings.bannerHeight);
+            thebanner.find(".thebanner-mask > ul").css("width", settings.bannerWidth);
+            thebanner.find(".thebanner-mask > ul").css("height", settings.bannerHeight);
 
             if (!settings.slides) {
-                thebanner.find(".thebanner-mask ul li").css("height", thebanner.height());
-                thebanner.find(".thebanner-mask ul li").css("width", thebanner.width());
+                thebanner.find(".thebanner-mask > ul > li").css("height", thebanner.height());
+                thebanner.find(".thebanner-mask > ul > li").css("width", thebanner.width());
             } else {
-                thebanner.find(".thebanner-mask ul li").css("height", thebanner.height());
-                thebanner.find(".thebanner-mask ul li").css("margin-right", settings.slideMargin);
-                thebanner.find(".thebanner-mask ul li").css("margin-left", settings.slideMargin);
+                thebanner.find(".thebanner-mask > ul > li").css("height", thebanner.height());
+                thebanner.find(".thebanner-mask > ul > li").css("margin-right", settings.slideMargin);
+                thebanner.find(".thebanner-mask > ul > li").css("margin-left", settings.slideMargin);
             }
 
 
 
-            thebanner.find(".thebanner-mask ul").addClass("the-banner");
+            thebanner.find(".thebanner-mask > ul").addClass("the-banner");
             thebanner.css("visibility", "hidden");
             thebanner.append("<div class='thebanner-title'></div>");
 
@@ -284,15 +283,22 @@ function browser() {
         montaSlides();
 
         function montaSlides() {
+           
+
+            if (settings.effect == "fade") {
+                thebanner.find(".thebanner-mask > ul > li").css("display", "none");
+                thebanner.find(".thebanner-mask > ul > li").eq(0).css("display", "block");
+            }
+
             if (settings.slides) {
                 thebanner.find(".the-banner-controls ul").html("");
                 thebanner.find(".the-banner-controls ul").append("<li><a data-index=0></a></li>");
                 var quantoCabe = 0;
                 var loopItens = 1;
 
-                for (n = 0; n < thebanner.find(".thebanner-mask ul li").length; n++) {
+                for (n = 0; n < thebanner.find(".thebanner-mask > ul > li").length; n++) {
 
-                    quantoCabe += (thebanner.find(".thebanner-mask ul li").width() + (settings.slideMargin * 2));
+                    quantoCabe += (thebanner.find(".thebanner-mask > ul > li").width() + (settings.slideMargin * 2));
 
                     if (quantoCabe > thebanner.width() * loopItens) {
 
@@ -309,10 +315,9 @@ function browser() {
 
                 thebanner.css("width", settings.bannerWidth);
 
-                if (thebanner.width() < thebanner.find(".thebanner-mask ul li").width() * 2) {
-                    thebanner.css("width", thebanner.find(".thebanner-mask ul li").width() + settings.slideMargin * 2);
+                if (thebanner.width() < thebanner.find(".thebanner-mask > ul > li").width() * 2) {
+                    thebanner.css("width", thebanner.find(".thebanner-mask > ul > li").width() + settings.slideMargin * 2);
                 }
-
             }
 
         }
@@ -326,7 +331,7 @@ function browser() {
 
         /* Resize Banner */
         function resizeTheBanner() {
-
+            
 
             if (settings.slides) {
                 montaSlides();
@@ -335,8 +340,8 @@ function browser() {
             } else {
                 widthBanner = thebanner.width();
 
-                thebanner.find(".thebanner-mask ul li").css("height", thebanner.height());
-                thebanner.find(".thebanner-mask ul li").css("width", widthBanner);
+                thebanner.find(".thebanner-mask > ul > li").css("height", thebanner.height());
+                thebanner.find(".thebanner-mask > ul > li").css("width", widthBanner);
                 thebanner.find(".the-banner").css("width", widthBanner * arrList.length);
 
 
@@ -450,6 +455,7 @@ function browser() {
         }
 
         function clickArrow(event) {
+
             window.clearInterval(intervalListener);
             if (settings.clickAndStop) { } else {
                 intervalListener = self.setInterval(function () { bannerTimer() }, settings.timer);
@@ -478,9 +484,9 @@ function browser() {
                     }
                 }
             }
-
-            controlClick(strLink, false);
             thebanner.find(".the-banner-arrow").unbind("click");
+            controlClick(strLink, false);
+            
         }
 
         /* end: Arrows */
@@ -494,6 +500,7 @@ function browser() {
                  $(thebanner).find(".the-banner-controls").css("display", "none");
                  $(thebanner).find("#the-banner-right").css("display", "none");
                  $(thebanner).find("#the-banner-left").css("display", "none");
+                 window.clearInterval(intervalListener);
             }        
         }
 
@@ -537,12 +544,12 @@ function browser() {
                 switch (settings.effect) {
                     // Together Effect  
                     case "slider":
-                        thebanner.find(" .thebanner-mask ul li").click(linkBanner);
+                        thebanner.find(" .thebanner-mask > ul > li").click(linkBanner);
                         thebanner.find(".the-banner").stop().animate({ marginLeft: 0 }, 0);
                         thebanner.find(".the-banner").html("");
                         thebanner.find(".the-banner").append(arrList[bannerAtual]);
                         thebanner.find(".the-banner").append(arrList[n]);
-                        thebanner.find(" .thebanner-mask ul li").css("width", widthBanner);
+                        thebanner.find(" .thebanner-mask > ul > li").css("width", widthBanner);
                         thebanner.find(".the-banner").stop().animate({ marginLeft: -widthBanner }, settings.speed, function () {
                             $(".the-banner-arrow").click(clickArrow);
                         });
@@ -551,12 +558,12 @@ function browser() {
 
 
                     case "discover":
-                        thebanner.find(" .thebanner-mask ul li").click(linkBanner);
+                        thebanner.find(" .thebanner-mask > ul > li").click(linkBanner);
                         thebanner.find(".the-banner").stop().animate({ marginLeft: 0 }, 0);
                         thebanner.find(".the-banner").html("");
                         thebanner.find(".the-banner").append(arrList[bannerAtual]);
                         thebanner.find(".the-banner").append(arrList[n]);
-                        thebanner.find(" .thebanner-mask ul li").css("width", widthBanner);
+                        thebanner.find(" .thebanner-mask > ul > li").css("width", widthBanner);
                         thebanner.find(".the-banner").stop().animate({ marginLeft: -widthBanner }, settings.speed, function () {
                             $(".the-banner-arrow").click(clickArrow);
                         });
@@ -566,36 +573,29 @@ function browser() {
 
                     case "fade":
 
-                        if (bannerAtual == index) {
+                            console.log(bannerAtual + "  " + index);
 
-                        } else {
-                            thebanner.find("> .the-banner-controls ul li a").off("click");
+                            thebanner.find("> .the-banner-controls ul li a").unbind("click");
+
+                            var bannerAtual2 = bannerAtual;
 
                             thebanner.find(".the-banner").stop().animate({ marginLeft: 0 }, 0);
-                            thebanner.find(".the-banner").html("");
-                            thebanner.find(".the-banner").append(arrList[bannerAtual]);
-                            thebanner.find(".the-banner").append(arrList[n]);
-                            thebanner.find(".thebanner-mask ul li:nth-child(1)").css("position", "relative");
-                            thebanner.find(".thebanner-mask ul li:nth-child(2)").css("position", "absolute");
+                            thebanner.find(".thebanner-mask > ul > li").eq(bannerAtual).css("position", "");
 
-                            thebanner.find(".thebanner-mask ul li:nth-child(2)").addClass("fadeBanner");
-                            thebanner.find(".thebanner-mask ul li:nth-child(2)").stop().animate({ opacity: 0 }, 0);
-                            thebanner.find(".thebanner-mask ul li:nth-child(2)").animate({ opacity: 1 }, settings.speed, function () {
-                                thebanner.find(".thebanner-mask ul li:nth-child(2)").css("position", "relative");
-                                thebanner.find(".thebanner-mask ul li:nth-child(1)").remove();
+                            thebanner.find(".thebanner-mask > ul > li").eq(index).stop().animate({ opacity: 0 }, 0);
+                            thebanner.find(".thebanner-mask > ul > li").eq(index).css("display", "block");
+                            thebanner.find(".thebanner-mask > ul > li").eq(index).css("position", "absolute");
+                            thebanner.find(".thebanner-mask > ul > li").eq(index).stop().animate({ opacity: 1 }, settings.speed, function(){
+                                thebanner.find(".thebanner-mask > ul > li").eq(bannerAtual2).css("display", "none");
                                 callClick();
                                 thebanner.find(".the-banner-arrow").unbind("click");
                                 thebanner.find(".the-banner-arrow").click(clickArrow);
+                                thebanner.find(".thebanner-mask > ul > li").eq(index).css("position", "")
                             });
-                            thebanner.find(".thebanner-mask ul li:nth-child(2)").html("");
-                            thebanner.find(".thebanner-mask ul li:nth-child(2)").append(arrListHtml[n]);
 
-                            //thebanner.find(" .thebanner-mask ul li:nth-child(2)").append($(arrList[n]).html());
-                            //thebanner.find(" .thebanner-mask ul li:nth-child(2)").append("<h3>"+ thebanner.find(" .thebanner-mask ul li:nth-child(2)").attr("data-title") +"</h3>");
-
-                            thebanner.find(".thebanner-mask ul li").css("width", widthBanner);
-                            thebanner.find(".thebanner-mask ul li").click(linkBanner);
-                        }
+                            //Return Click
+                            //thebanner.find(".thebanner-mask > ul > li").click(linkBanner);
+                            
 
                         break
 
@@ -640,7 +640,7 @@ function browser() {
         /* Draggable */
         drag();
         function drag() {
-            thebanner.find(" .thebanner-mask ul li").bind('click', linkBanner);
+            thebanner.find(" .thebanner-mask > ul > li").bind('click', linkBanner);
 
             var cursorAtual;
 
@@ -655,17 +655,17 @@ function browser() {
                         window.clearInterval(intervalListener);
                         initialPosition = Number(thebanner.find(".the-banner").position().left);
                         isDrag = true;
-                        thebanner.find(" .thebanner-mask ul li").unbind('click');
-                        thebanner.find(" .thebanner-mask ul li").addClass("dragging");
-                        //thebanner.find(" .thebanner-mask ul li").css("cursor", "url(../img/framework/grabbing.png)");
+                        thebanner.find(" .thebanner-mask > ul > li").unbind('click');
+                        thebanner.find(" .thebanner-mask > ul > li").addClass("dragging");
+                        //thebanner.find(" .thebanner-mask > ul > li").css("cursor", "url(../img/framework/grabbing.png)");
 
 
 
 
                     },
                     stop: function () {
-                        thebanner.find(" .thebanner-mask ul li").removeClass("dragging");
-                        thebanner.find(" .thebanner-mask ul li").css("cursor", cursorAtual);
+                        thebanner.find(" .thebanner-mask > ul > li").removeClass("dragging");
+                        thebanner.find(" .thebanner-mask > ul > li").css("cursor", cursorAtual);
 
                         var range = 0;
                         var dif = widthBanner / 10;
@@ -746,9 +746,6 @@ function browser() {
 
 })(jQuery);
 /** end Component: The Banner **/
-
-
-
 
 
 
@@ -1506,55 +1503,6 @@ function menuLeft() {
 
 
 
-/** Component: Menu + Submenu **/
-/*function menuSub(totalLevel){
-if(typeof(totalLevel)==='undefined') totalLevel = 3;
-        
-var n=1;
-var stMenu = ".level";
-var stMenu2 = "";
-var topStartMenu = 0;
-        
-for(n; n <= totalLevel; n++){
-                        
-stMenu2 += stMenu+n+">";
-$(stMenu+n).mouseover({param1: n, param2: stMenu+n}, fOver);
-$(stMenu+n).mouseleave({param1: n, param2: stMenu+n}, fOut);
-            
-}
-        
-function fOver(event){
-            
-topStartMenu = $(this).height();
-leftMenu = $(this).width();
-            
-var menuAbrir = event.data.param2 + " > .menu-submenu";
-            
-if(event.data.param1 == 1){
-$(menuAbrir).css("top", topStartMenu);
-}else{
-$(menuAbrir).css("left", $(this).width());
-}
-                            
-$(this).find("> .menu-submenu").css("display", "block");
-}
-        
-function fOut(event){
-            
-$(this).find("> .menu-submenu").css("display", "none");
-            
-}
-}*/
-/** end: Component: Menu + Submenu **/
-
-
-
-
-
-
-
-
-
 /*Component: Menu Responsive **/
 (function ($) {
 
@@ -1568,11 +1516,11 @@ $(this).find("> .menu-submenu").css("display", "none");
         labelButtonMenu: "",
         htmlMiniBar: "",
         totalLevel: 3,
-        cleanSpaces:true,
+        cleanSpaces: true,
 
         /* Settings.type */
-        type:"",
-        animateBase:false
+        type: "",
+        animateBase: false
 
     };
 
@@ -1582,7 +1530,6 @@ $(this).find("> .menu-submenu").css("display", "none");
         var estruturaMenu = $(this).html();
         var This = $(this);
         var toogleMenu = true;
-        var isResponsive = true;
 
         this.each(function () {
             var currentElement = $(this);
@@ -1612,7 +1559,7 @@ $(this).find("> .menu-submenu").css("display", "none");
 
 
         if (settings.responsive) {
-            
+
             createMenu();
 
             responsiveMenu();
@@ -1630,24 +1577,24 @@ $(this).find("> .menu-submenu").css("display", "none");
         if (settings.type == "side") {
             createSideMenu();
 
-        }else{
-                
+        } else {
 
 
-            if(settings.cleanSpaces){
-                This.find("a").each(function(){
+
+            if (settings.cleanSpaces) {
+                This.find("a").each(function () {
                     $(this).html($(this).text().replace(/\s/g, '&nbsp;'));
-                }) 
+                })
 
             }
-            
 
-            
+
+
         }
 
 
 
-        function createSideMenu(){
+        function createSideMenu() {
 
             var nav = This.find("> nav");
             var diferenca = This.outerWidth() - $(nav).outerWidth();
@@ -1657,7 +1604,7 @@ $(this).find("> .menu-submenu").css("display", "none");
 
             /* Create Black Cover */
             $('body').prepend("<div class='the-menu-side-cover'></div>");
-           
+
             /* Align menu visible */
             This.css("left", -diferenca)
 
@@ -1666,13 +1613,13 @@ $(this).find("> .menu-submenu").css("display", "none");
             This.find(".options").css("width", diferenca);
 
             /* Each Li */
-            This.find(".main > ul > li").each(function(index){
-                
+            This.find(".main > ul > li").each(function (index) {
+
 
                 /* BG Icon */
                 var icon = $(this).attr("data-icon")
-                if(icon){
-                   $(this).find("> a").css("background-image", "url(" + icon +  ")");
+                if (icon) {
+                    $(this).find("> a").css("background-image", "url(" + icon + ")");
                 }
 
                 $(this).find("> a").attr("data-eq", index)
@@ -1683,139 +1630,139 @@ $(this).find("> .menu-submenu").css("display", "none");
 
             var itemAtual = -1;
             /* Click */
-            This.find(".main > ul > li > a").click(function(e){
+            This.find(".main > ul > li > a").click(function (event) {
 
 
                 This.find(".main > ul > li > a").removeClass("active");
                 $(this).addClass("active");
 
 
-                if($(this).parent("li").find(".sub-side").length){
-                    
-                    event.preventDefault();
-                    
+                if ($(this).parent("li").find(".sub-side").length) {
 
-                    if(itemAtual == $(this).attr("data-eq")){
-                        
+                    event.preventDefault();
+
+
+                    if (itemAtual == $(this).attr("data-eq")) {
+
                         remover($(this));
 
-                    }else{
+                    } else {
 
                         adicionar($(this));
 
 
                     }
 
-                    
-                    
+
+
                 }
 
             });
 
 
-            function remover(t){
+            function remover(t) {
                 $(t).removeClass("active");
                 $(".the-menu-side-cover").unbind("click");
-                This.stop().animate({left:-diferenca}, settings.time);
+                This.stop().animate({ left: -diferenca }, settings.time);
 
-                $(settings.base).stop().animate({paddingLeft:$(nav).outerWidth()}, settings.time, function(){
+                $(settings.base).stop().animate({ paddingLeft: $(nav).outerWidth() }, settings.time, function () {
 
-                   This.find(".options > div").remove();
+                    This.find(".options > div").remove();
 
                 });
 
-                $(".the-menu-side-cover").animate({opacity:0}, settings.time, function(){
+                $(".the-menu-side-cover").animate({ opacity: 0 }, settings.time, function () {
                     $(".the-menu-side-cover").css("display", "none");
                 });
 
                 itemAtual = -1;
             }
 
-            function adicionar(t){
+            function adicionar(t) {
 
 
 
-                This.stop().animate({left:0}, settings.time);
-                
-                if(settings.animateBase){
-                   $(settings.base).stop().animate({paddingLeft:This.outerWidth()}, settings.time); 
+                This.stop().animate({ left: 0 }, settings.time);
+
+                if (settings.animateBase) {
+                    $(settings.base).stop().animate({ paddingLeft: This.outerWidth() }, settings.time);
                 }
-                
-                
+
+
                 This.find(".options").html("");
                 This.find(".options").html($(t).parent().find(".sub-side").html());
-                
-                This.find('.options a').click(function(){
+
+                This.find('.options a').click(function () {
 
                     var href = $(this).attr("href");
 
-                    if(href.charAt(0) == "#"){
+                    if (href.charAt(0) == "#") {
                         remover(t);
                     }
 
                 });
 
-                if($(".the-menu-side-cover").css("display") == "block"){
+                if ($(".the-menu-side-cover").css("display") == "block") {
 
-                }else{
+                } else {
                     $(".the-menu-side-cover").css("display", "block");
-                    $(".the-menu-side-cover").animate({opacity:0}, 0);
-                    $(".the-menu-side-cover").animate({opacity:1}, settings.time);  
-                    $(".the-menu-side-cover").click(function(){
+                    $(".the-menu-side-cover").animate({ opacity: 0 }, 0);
+                    $(".the-menu-side-cover").animate({ opacity: 1 }, settings.time);
+                    $(".the-menu-side-cover").click(function () {
                         remover(t);
                     });
 
                 }
-           
+
                 itemAtual = $(t).attr("data-eq");
             }
         }
 
 
 
-            
+
         function createMenu() {
-                $('body').prepend("<div class='the-menu-minibar'><a class='the-menu-ico btn'>" + settings.labelButtonMenu + "</a>" + settings.htmlMiniBar + "</div>");
+            $('body').prepend("<div class='the-menu-minibar'><a class='the-menu-ico btn'>" + settings.labelButtonMenu + "</a>" + settings.htmlMiniBar + "</div>");
 
-                $('body').prepend("<div class='the-menu-responsive'></div>");
-                $('.the-menu-responsive').html(estruturaMenu);
-                $('.the-menu-responsive ul').css('display', 'block');
-                $('.the-menu-responsive li').css('display', 'block');
+            $('body').prepend("<div class='the-menu-responsive'></div>");
+            $('.the-menu-responsive').html(estruturaMenu);
+            $('.the-menu-responsive ul').css('display', 'block');
+            $('.the-menu-responsive li').css('display', 'block');
 
-                $('.the-menu-responsive ul').each(function () {
-                    if ($(this).hasClass('menu-submenu')) {
-                        $(this).removeClass('menu-submenu');
-                        $(this).addClass('sub-resp');
-                    }
-                });
+            $('.the-menu-responsive ul').each(function () {
+                if ($(this).hasClass('menu-submenu')) {
+                    $(this).removeClass('menu-submenu');
+                    $(this).addClass('sub-resp');
+                }
+            });
 
-                $('.the-menu-responsive ul').removeClass('menu');
+            $('.the-menu-responsive ul').removeClass('menu');
 
-                $('body').css('overflow-x', 'hidden');
+            $('body').css('overflow-x', 'hidden');
 
-                $('.the-menu-minibar .the-menu-ico').click(function () {
+            $('.the-menu-minibar .the-menu-ico').click(function () {
 
-                    if (toogleMenu) {
-                        $(settings.base).css('width', $(settings.base).width());
+                if (toogleMenu) {
+                    $(settings.base).css('width', $(settings.base).width());
 
-                        $(settings.base).stop().animate({ marginLeft: $('.the-menu-responsive').width() }, settings.time);
-                        $('.the-menu-minibar').stop().animate({ left: $('.the-menu-responsive').width() }, settings.time, function () {
-                            $(settings.base).css('width', '100%');
-                        });
-                        $('.the-menu-responsive').stop().animate({ left: 0 }, settings.time);
-                        $('.the-menu-responsive').css("display", "block");
-                        toogleMenu = false;
-                    } else {
-                        $(settings.base).stop().animate({ marginLeft: 0 }, settings.time);
-                        $('.the-menu-minibar').stop().animate({ left: 0 }, settings.time);
-                        $('.the-menu-responsive').stop().animate({ left: -$('.the-menu-responsive').width() }, settings.time, function () {
-                            $(settings.base).css('width', '100%');
-                        });
-                        toogleMenu = true;
-                    }
-                });                
-        } 
-            
+                    $(settings.base).stop().animate({ marginLeft: $('.the-menu-responsive').width() }, settings.time);
+                    $('.the-menu-minibar').stop().animate({ left: $('.the-menu-responsive').width() }, settings.time, function () {
+                        $(settings.base).css('width', '100%');
+                    });
+                    $('.the-menu-responsive').stop().animate({ left: 0 }, settings.time);
+                    $('.the-menu-responsive').css("display", "block");
+                    toogleMenu = false;
+                } else {
+                    $(settings.base).stop().animate({ marginLeft: 0 }, settings.time);
+                    $('.the-menu-minibar').stop().animate({ left: 0 }, settings.time);
+                    $('.the-menu-responsive').stop().animate({ left: -$('.the-menu-responsive').width() }, settings.time, function () {
+                        $(settings.base).css('width', '100%');
+                    });
+                    toogleMenu = true;
+                }
+            });
+        }
+
 
 
         function responsiveMenu() {
@@ -1842,62 +1789,62 @@ $(this).find("> .menu-submenu").css("display", "none");
 
 
 
-            /** Sub Menu **************/
-            var n = 1;
-            var stMenu = ".level";
-            var stMenu2 = "";
-            var topStartMenu = 0;
+        /** Sub Menu **************/
+        var n = 1;
+        var stMenu = ".level";
+        var stMenu2 = "";
+        var topStartMenu = 0;
 
-            addOver();
-            function addOver() {
-                n = 1;
+        addOver();
+        function addOver() {
+            n = 1;
 
-                for (n; n <= settings.totalLevel; n++) {
+            for (n; n <= settings.totalLevel; n++) {
 
-                    stMenu2 += stMenu + n + ">";
-                    $(stMenu + n).mouseover({ param1: n, param2: stMenu + n }, fOver);
-                    $(stMenu + n).mouseleave({ param1: n, param2: stMenu + n }, fOut);
-
-                }
+                stMenu2 += stMenu + n + ">";
+                $(stMenu + n).mouseover({ param1: n, param2: stMenu + n }, fOver);
+                $(stMenu + n).mouseleave({ param1: n, param2: stMenu + n }, fOut);
 
             }
-            
-            var principal;
-            function fOver(event) {
 
-                principal = $(this);
-                principal.find('a').addClass('hovered');
-                
-                topStartMenu = $(this).height();
-                leftMenu = $(this).width();
+        }
 
-                var menuAbrir = event.data.param2 + " > .menu-submenu";
+        var principal;
+        function fOver(event) {
 
-                if (event.data.param1 == 1) {
-                    $(menuAbrir).css("top", topStartMenu);
-                } else {
-                    $(menuAbrir).css("left", $(this).width());
-                }
+            principal = $(this);
+            principal.find('a').addClass('hovered');
 
-                $(this).find("> .menu-submenu").css("display", "block");
-                
-                
-                
-                
-                
+            topStartMenu = $(this).height();
+            leftMenu = $(this).width();
+
+            var menuAbrir = event.data.param2 + " > .menu-submenu";
+
+            if (event.data.param1 == 1) {
+                $(menuAbrir).css("top", topStartMenu);
+            } else {
+                $(menuAbrir).css("left", $(this).width());
             }
 
-            function fOut(event) {
-
-                $(this).find("> .menu-submenu").css("display", "none");
-                principal.find('a').removeClass('hovered');
-
-            }
-            /** end: Sub Menu **************/
+            $(this).find("> .menu-submenu").css("display", "block");
 
 
 
-                
+
+
+        }
+
+        function fOut(event) {
+
+            $(this).find("> .menu-submenu").css("display", "none");
+            principal.find('a').removeClass('hovered');
+
+        }
+        /** end: Sub Menu **************/
+
+
+
+
 
 
 
@@ -1990,24 +1937,24 @@ function masksForms() {
     // jQuery Masked Input
     //$('textarea').html('');
 
-    
+
 
     $('.maskTel').mask("(99) 9999-9999?9").ready(function (event) {
-        try{
+        try {
             var target, phone, element;
             target = (event.currentTarget) ? event.currentTarget : event.srcElement;
             phone = target.value.replace(/\D/g, '');
             element = $(target);
             element.unmask();
-            
+
             if (phone.length > 10) {
                 element.mask("(99) 99999-999?9");
             } else {
                 element.mask("(99) 9999-9999?9");
             }
-            }catch(err){
-        
-            }
+        } catch (err) {
+
+        }
     });
 
 
@@ -2039,15 +1986,15 @@ function masksForms() {
     $.mask.definitions['H'] = "[0-2]";
     $.mask.definitions['M'] = "[0-5]";
     $.mask.definitions['h'] = "[A-Z-a-z]";
-    
+
     $('.maskPlaca').mask("hhh-9999");
 
     $('.maskHora').mask("H9:M9");
 
     //$('.maskNumero').attr("type", "number");
-    
-    $('.maskNumero').on('keypress', function(ev) {
-    var keyCode = window.event ? ev.keyCode : ev.which;
+
+    $('.maskNumero').on('keypress', function (ev) {
+        var keyCode = window.event ? ev.keyCode : ev.which;
         //codes for 0-9
         if (keyCode < 48 || keyCode > 57) {
             //codes for backspace, delete, enter
@@ -2058,7 +2005,7 @@ function masksForms() {
     });
 
 
-    $('.maskValor').maskMoney({symbol:'R$ ', thousands:'.', decimal:',', symbolStay: true});
+    $('.maskValor').maskMoney({ symbol: 'R$ ', thousands: '.', decimal: ',', symbolStay: true });
 
     $(".maskDate").datepicker({
         dateFormat: 'dd/mm/yy',
@@ -2072,7 +2019,7 @@ function masksForms() {
     });
 
 
-    
+
 }
 /** end: Component: Masks **/
 
@@ -2284,53 +2231,53 @@ function scrollFixed(id) {
 
 /* BIG ***************************************/
 
-function fBig(){
-  
-$(document).ready(function (e) {
+function fBig() {
 
-            $('#menuPrincipal').themenu({ minWidth: 885 });
+    $(document).ready(function (e) {
 
-            $('input, textarea').focus(function () {
-                enter($(this));
-            });
+        //$('#menuPrincipal').themenu({ minWidth: 885 });
 
-            $('input, textarea').focusout(function () {
-                $(document).unbind("keypress");
-            });
+        $('input').focus(function () {
+            enter($(this));
+        });
 
-            function enter(t) {
+        $('input').focusout(function () {
+            $(document).unbind("keypress");
+        });
 
-                $(document).keypress(function (e) {
+        function enter(t) {
 
-                    if (e.which == 13) {
-                        e.preventDefault();
+            $(document).keypress(function (e) {
 
-                        var arr = new Array();
-                        arr[0] = $(t).parent();
-                        arr[1] = $(t).parent().parent();
-                        arr[2] = $(t).parent().parent().parent();
-                        arr[3] = $(t).parent().parent().parent().parent();
-                        arr[4] = $(t).parent().parent().parent().parent().parent();
-                        arr[5] = $(t).parent().parent().parent().parent().parent();
+                if (e.which == 13) {
+                    e.preventDefault();
+
+                    var arr = new Array();
+                    arr[0] = $(t).parent();
+                    arr[1] = $(t).parent().parent();
+                    arr[2] = $(t).parent().parent().parent();
+                    arr[3] = $(t).parent().parent().parent().parent();
+                    arr[4] = $(t).parent().parent().parent().parent().parent();
+                    arr[5] = $(t).parent().parent().parent().parent().parent();
 
 
-                        var n = 0;
-                        for (n; n < 5; n++) {
+                    var n = 0;
+                    for (n; n < 5; n++) {
 
-                            if (arr[n].find("input[type='submit']").attr("value")) {
-                                arr[n].find("input[type='submit']").click();
+                        if (arr[n].find("input[type='submit']").attr("value")) {
+                            arr[n].find("input[type='submit']").click();
 
-                            } else {
-                            }
-
+                        } else {
                         }
 
                     }
-                });
 
-            }
+                }
+            });
 
-        });
+        }
+
+    });
 
 }
 

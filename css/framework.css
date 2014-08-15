@@ -1306,6 +1306,34 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4c4c4c', end
 
 
 
+
+
+
+
+.cloud-tags{
+
+}
+
+
+	.cloud-tags li{
+		float:left;
+		margin-right: 10px;
+		font-size: 12px;
+		background: none;
+	}
+
+
+	.cloud-tags li:nth-child(2n){
+		font-size:14px;
+		font-weight: bold;
+	}
+
+
+
+
+
+
+
 #theload-bg{
 	background-color:#FFF;
 	width:100%;
@@ -1337,6 +1365,35 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4c4c4c', end
 	text-align:center;
 	font-size:9px !important;
 }
+
+
+
+
+
+
+.cloud-tags{
+
+}
+
+
+	.cloud-tags li{
+		float:left;
+		margin-right: 10px;
+		font-size: 12px;
+		background:none !important;
+		color:#e2e1c4;
+		font-family: 'corporates-lightregular', Arial;
+	}
+
+
+	.cloud-tags li:nth-child(2n){
+		font-size:14px;
+		font-weight: bold;
+	}
+
+
+
+
 
 
 

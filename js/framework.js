@@ -501,6 +501,8 @@ function browser() {
                  $(thebanner).find("#the-banner-right").css("display", "none");
                  $(thebanner).find("#the-banner-left").css("display", "none");
                  window.clearInterval(intervalListener);
+            }else{
+                drag();
             }        
         }
 
@@ -638,7 +640,7 @@ function browser() {
 
 
         /* Draggable */
-        drag();
+        
         function drag() {
             thebanner.find(" .thebanner-mask > ul > li").bind('click', linkBanner);
 

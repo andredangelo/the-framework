@@ -45,19 +45,39 @@ $(document).ready(function (e) {
 
 /** Component: Browser **/
 function browser() {
-    if ($.browser.msie) {
-        if (parseInt($.browser.version) == 8) {
-            $("body").addClass("ie8");
-        } else if (parseInt($.browser.version) == 7) {
-            $("body").addClass("ie7");
-        } else if (parseInt($.browser.version) == 6) {
-            $("body").addClass("ie6");
-        } else if (parseInt($.browser.version) == 9) {
-            $("body").addClass("ie9");
-        } else if (parseInt($.browser.version) == 10) {
-            $("body").addClass("ie10");
-        }
-    }
+    $(document).ready(function() {
+   
+       // Internet Explorer  
+       if(($.browser.mozilla == true)&&($.browser.version == 11.0)){  
+              $('body').addClass('ie11');
+              
+        }else if(($.browser.msie == true)&&($.browser.version == 10.0)){  
+              $('body').addClass('ie10');
+              
+        }else if(($.browser.msie == true)&&($.browser.version == 9.0)){  
+              $('body').addClass('ie9');
+              
+        }else if(($.browser.msie == true)&&($.browser.version == 8.0)){  
+              $('body').addClass('ie8');
+        
+        }else if(($.browser.msie == true)&&($.browser.version == 7.0)){  
+              $('body').addClass('ie7');
+         
+        // Firefox          
+        }else if ($.browser.mozilla == true) {
+            $('body').addClass('firefox');
+        
+            
+        // Google Chrome / Safari     
+        } else if($.browser.webkit == true) {  
+              $('body').addClass('chrome');  
+        
+        // Opera      
+        } else if($.browser.opera == true) {  
+              $('body').addClass('opera');
+            
+         } else {}
+    });
 }
 /** end: Component: Browser **/
 
@@ -88,7 +108,8 @@ function browser() {
         arrow: true,
         slides: false,
         slideMargin: 0,
-        thumb: false
+        thumb: false,
+        afterClickSeta: function () { }
     };
     /* end: Default Options *******/
 
@@ -111,6 +132,7 @@ function browser() {
         var isDrag = false;
         var isResizing = false;
         var speedOriginal = settings.speed;
+        var arrowDisable = false;
 
         this.each(function () {
             var currentElement = $(this);
@@ -119,6 +141,7 @@ function browser() {
 
         /* Call Functions **/
         initialSettings();
+
 
         if (settings.autoAnimate) {
             var intervalListener = self.setInterval(function () { bannerTimer() }, settings.timer);
@@ -371,12 +394,6 @@ function browser() {
 
 
 
-
-
-
-
-
-
         function linkBanner() {
             if (isDrag) {
 
@@ -413,6 +430,7 @@ function browser() {
         controlAtual.addClass("active");
 
 
+
         thebanner.css("visibility", "visible");
 
         callClick();
@@ -434,6 +452,37 @@ function browser() {
 
 
 
+
+
+
+
+        //settings.arrowDisable
+        function fArrowDisable(){
+            
+            var controlAtualIndex = Number($(controlAtual).attr("data-index"));
+
+            if(controlAtualIndex <= 0){
+                thebanner.find("#the-banner-left").hide();
+            }else{
+                thebanner.find("#the-banner-left").show();
+            }
+            
+            if(controlAtualIndex >= totalNumbersBanners-1 ){
+                thebanner.find("#the-banner-right").hide();
+            }else{
+                thebanner.find("#the-banner-right").show();
+            }
+            
+        }
+
+
+
+
+
+
+
+
+
         /* Arrows    */
 
         if (settings.arrow) {
@@ -452,9 +501,16 @@ function browser() {
                 $(this).stop().animate({ opacity: 0.5 }, 200);
             })
             thebanner.find(".the-banner-arrow").click(clickArrow);
+
+            if(settings.arrowDisable){
+                fArrowDisable();
+            }
+
         }
 
         function clickArrow(event) {
+
+
 
             window.clearInterval(intervalListener);
             if (settings.clickAndStop) { } else {
@@ -484,9 +540,13 @@ function browser() {
                     }
                 }
             }
+
             thebanner.find(".the-banner-arrow").unbind("click");
             controlClick(strLink, false);
-            
+
+            settings.afterClickSeta();
+
+
         }
 
         /* end: Arrows */
@@ -515,6 +575,8 @@ function browser() {
         function controlClick(index, timer) {
 
             //alert(bannerAtual + "___novo:" + index);
+
+            
 
             var n = index;
 
@@ -622,6 +684,9 @@ function browser() {
                 thebanner.find(".thebanner-title").html("<h3>" + arrList[bannerAtual].attr("data-title") + "</h3>");
             }
 
+            if(settings.arrowDisable){
+                fArrowDisable(); 
+            }
             isResizing = 0;
             settings.speed = speedOriginal;
 
@@ -1932,7 +1997,6 @@ function menuTabs() {
 
 
 
-
 /** Component: Masks **/
 function masksForms() {
     /* Mascara telefone */
@@ -1940,25 +2004,57 @@ function masksForms() {
     //$('textarea').html('');
 
 
+    /** Placeholder Helper **/
+    $("form").find("span > input").focus(function(){
+
+        if($(this).attr("placeholder")){
+            var placeHolder = String($(this).attr("placeholder")).replace(" ","&nbsp;");
+            $(this).parent().css("position", "relative");
+            $(this).parent().prepend("<span class='placeholder-helper'>"+placeHolder+"</span>")
+        }
+
+    });
+
+    $("form").find("span > input").blur(function(){
+        $(".placeholder-helper").remove();
+        $(this).parent().css("position", "");
+    });
+
+    $("form").find("span > textarea").focus(function(){
+
+        if($(this).attr("placeholder")){
+            var placeHolder = String($(this).attr("placeholder")).replace(" ","&nbsp;");
+            $(this).parent().css("position", "relative");
+            $(this).parent().prepend("<span class='placeholder-helper'>"+placeHolder+"</span>")
+        }
+
+    });
+
+    $("form").find("span > textarea").blur(function(){
+        $(".placeholder-helper").remove();
+        $(this).parent().css("position", "");
+    });
+
+
+    
 
     $('.maskTel').mask("(99) 9999-9999?9").ready(function (event) {
-        try {
+        try{
             var target, phone, element;
             target = (event.currentTarget) ? event.currentTarget : event.srcElement;
             phone = target.value.replace(/\D/g, '');
             element = $(target);
             element.unmask();
-
+            
             if (phone.length > 10) {
                 element.mask("(99) 99999-999?9");
             } else {
                 element.mask("(99) 9999-9999?9");
             }
-        } catch (err) {
-
-        }
+            }catch(err){
+        
+            }
     });
-
 
     $('.maskTel').focusout(function () {
         var phone, element;
@@ -1972,31 +2068,25 @@ function masksForms() {
         }
     }).trigger('focusout');
 
-
-
-
-
-
-
-
-
     $('.cep').mask("99999-999");
     $('.cpf').mask("999.999.999-99");
     $('.cnpj').mask("99.999.999/9999-99");
+
+    $('.maskCep').mask("99999-999");
+    $('.maskCpf').mask("999.999.999-99");
+    $('.MaskCnpj').mask("99.999.999/9999-99");
     $(".maskDate").mask("99/99/9999");
 
     $.mask.definitions['H'] = "[0-2]";
     $.mask.definitions['M'] = "[0-5]";
     $.mask.definitions['h'] = "[A-Z-a-z]";
-
+    
     $('.maskPlaca').mask("hhh-9999");
 
     $('.maskHora').mask("H9:M9");
-
-    //$('.maskNumero').attr("type", "number");
-
-    $('.maskNumero').on('keypress', function (ev) {
-        var keyCode = window.event ? ev.keyCode : ev.which;
+    
+    $('.maskNumero').on('keypress', function(ev) {
+    var keyCode = window.event ? ev.keyCode : ev.which;
         //codes for 0-9
         if (keyCode < 48 || keyCode > 57) {
             //codes for backspace, delete, enter
@@ -2006,8 +2096,7 @@ function masksForms() {
         }
     });
 
-
-    $('.maskValor').maskMoney({ symbol: 'R$ ', thousands: '.', decimal: ',', symbolStay: true });
+    $('.maskValor').maskMoney({symbol:'R$ ', thousands:'.', decimal:',', symbolStay: true});
 
     $(".maskDate").datepicker({
         dateFormat: 'dd/mm/yy',
@@ -2019,12 +2108,8 @@ function masksForms() {
         nextText: 'Próximo',
         prevText: 'Anterior'
     });
-
-
-
 }
 /** end: Component: Masks **/
-
 
 
 

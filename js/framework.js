@@ -810,9 +810,9 @@ function browser() {
         return this;
     };
     $.fn.thebanner.defaults = defaults;
-
 })(jQuery);
 /** end Component: The Banner **/
+
 
 
 
@@ -959,10 +959,9 @@ function browser() {
 
 
                         if (div.attr("data-height")) {
-                            
                             $('.thebox-content').css('height', div.attr("data-height"));
                         } else {
-                            $('.thebox-content').css('height', 'auto');
+                            $('.thebox-content').css('height', '100%');
                         }
                         
                         
@@ -1401,9 +1400,9 @@ function browser() {
         return this;
     };
     $.fn.thebox.defaults = defaults;
-
 })(jQuery);
 /** end Component: The Box **/
+
 
 
 
@@ -2007,7 +2006,7 @@ function masksForms() {
     /** Placeholder Helper **/
     $("form").find("span > input").focus(function(){
 
-        if($(this).attr("placeholder")){
+        if($(this).attr("placeholder") && $(this).attr("value")){
             var placeHolder = String($(this).attr("placeholder")).replace(" ","&nbsp;");
             $(this).parent().css("position", "relative");
             $(this).parent().prepend("<span class='placeholder-helper'>"+placeHolder+"</span>")
